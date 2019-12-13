@@ -7,7 +7,6 @@ include_directories(.)
 
 add_executable(ApacheLogAnalyzer
         Document.h
-        DocumentImpl.cpp
         FileAnalyzerService.h
         FileAnalyzerServiceImpl.cpp
         FileManager.cpp
@@ -16,8 +15,7 @@ add_executable(ApacheLogAnalyzer
         LogAnalyzerService.h
         LogAnalyzerServiceImpl.cpp
         LogFactory.h
-        LogImpl.cpp
         Main.h
         MainImpl.cpp
         Request.h
-        RequestImpl.cpp)
+        Request.cpp Document.cpp Log.cpp)
