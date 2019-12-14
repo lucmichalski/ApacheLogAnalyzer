@@ -11,6 +11,7 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <string>
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "FileManagerService.h"
@@ -25,10 +26,10 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-	Log ImportLogFile(fileName: string);
+FileManager::Log ImportLogFile(fileName: string);
 	
-	File CreateDotFile(documents: Collection<Document>,
-		requests: Collection<Request>);
+FileManager::File CreateDotFile(documents: Collection<Document>,
+		requests: Collection<Request>);	
 
 //------------------------------------------------- Surcharge d'opérateurs
 FileManager & FileManager::operator = ( const FileManager & unFileManager )
@@ -67,5 +68,4 @@ FileManager::~FileManager ( )
 
 //------------------------------------------------------------------ PRIVE
 //----------------------------------------------------- Méthodes protégées
-void checkRequestsFormatValidity(Collection<string> strRequests);
-Collection<string> extractFileLines(File file);
+UnorderedSet<string> extractLogLines(File logFile);
