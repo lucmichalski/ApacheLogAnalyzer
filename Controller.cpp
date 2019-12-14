@@ -1,5 +1,5 @@
 /*************************************************************************
-   FileManager - Service sur le traitement des fichiers de l'application
+                    Controller - Contrôleur de l'application
 							 -------------------
 	début                : 11/12/2019
 	copyright            : (C) 2019 par :
@@ -9,4 +9,5 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-#include "FileManager.h"
+
+#include "Controller.h"
