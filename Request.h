@@ -60,7 +60,7 @@ public:
      * @param destination Le pointeur du document destination de la requête
      * @param time La date de la requête
      */
-    Request(Document &source, Document &destination, time_t time)
+    Request(const Document &source, const Document &destination, time_t time)
             : srcDocument(source), destDocument(destination), date(time) {}
 
     /**
@@ -81,8 +81,8 @@ public:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-    Document &srcDocument;
-    Document &destDocument;
+    const Document &srcDocument;
+    const Document &destDocument;
     time_t date = 0;
 };
 

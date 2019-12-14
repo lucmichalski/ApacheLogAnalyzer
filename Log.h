@@ -1,5 +1,5 @@
 /*************************************************************************
-            Log  -  Représente le fichier de log importé
+                Log - Représente le fichier de log importé
 							 -------------------
 	début                : 11/12/2019
 	copyright            : (C) 2019 par :
@@ -30,22 +30,18 @@ class Log {
 public:
 //----------------------------------------------------- Méthodes publiques
     /**
-     * Retourne le pointeur sur l'ensemble des requêtes du log.
-     *
      * @return Le pointeur sur l'ensemble des requêtes du log
      */
-    const unordered_set<Request> *GetRequests() const {
+    const unordered_set<const Request *> *GetRequests() const {
         return requests;
     }
 
     /**
-     * Retourne le pointeur sur l'ensemble des documents du log.
-     *
      * @return Le pointeur sur l'ensemble des documents du log
      */
-     const unordered_set<Document> *GetDocuments() const {
-         return documents;
-     }
+    const unordered_set<const Document *> *GetDocuments() const {
+        return documents;
+    }
 
 //-------------------------------------------- Constructeurs - destructeur
     /**
@@ -71,9 +67,37 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
+    friend class LogFactory;
+//----------------------------------------------------- Méthodes protégées
+    /**
+     * Ajoute une requête au Log.
+     *
+     * @param request La référence à la requête à ajouter
+     */
+    void addRequest(const Request *request) {
+        requests->insert(request);
+    }
+
+    /**
+     * Ajoute un document au Log.
+     *
+     * @param document La référence au document à ajouter
+     */
+    void addDocument(const Document *document) {
+        documents->insert(document);
+    }
+
+    /**
+     * Cherche et retourne le pointeur du document associé à l'URL passé en paramètre s'il existe, nullptr sinon.
+     *
+     * @param URL La référence à l'URL du document à rechercher
+     * @return Le pointeur du document associé à l'URL s'il existe, nullptr sinon
+     */
+    const Document *getDocument(const string &URL) const;
+
 //----------------------------------------------------- Attributs protégés
-    unordered_set<Request> *requests;
-    unordered_set<Document> *documents;
+    unordered_set<const Request *> *requests = nullptr;
+    unordered_set<const Document *> *documents = nullptr;
 };
 
 #endif // LOG_H

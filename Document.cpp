@@ -16,7 +16,7 @@
 
 //----------------------------------------------------------------- PUBLIC
 /**
- * Créer une extension
+ * Retourne l'extension du document déterminé à partir de son URL.
  *
  * @return Le pointeur sur l'extension du document
  */
