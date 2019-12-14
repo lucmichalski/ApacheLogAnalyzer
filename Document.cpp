@@ -16,11 +16,11 @@
 
 //----------------------------------------------------------------- PUBLIC
 /**
- * Retourne l'extension du document déterminé à partir de son URL.
+ * Analyse l'URL avec une Regex pour déterminer l'extension du document puis la retourne.
  *
- * @return Le pointeur sur l'extension du document
+ * @return La chaîne représentant l'extension du document
  */
-string *Document::GetExtension() {
+string Document::GetExtension() {
     // TODO : Récupérer l'extension de l'URL du document
-    return new string(URL); // A remplacer...
+    return URL; // A remplacer...
 }

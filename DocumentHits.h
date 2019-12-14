@@ -28,14 +28,14 @@ public:
     /**
      * @return La référence constante au document associé au nombre de hits
      */
-    const Document &getDocument() const {
+    const Document &GetDocument() const {
         return document;
     }
 
     /**
      * @return Le nombre de hits associé au document
      */
-    int getNbHits() const {
+    int GetNbHits() const {
         return nbHits;
     }
 
@@ -46,7 +46,7 @@ public:
      * @param theDocument La référence au document à associer au nombre de hits
      * @param theNbHits Le nombre de hits du document associé
      */
-    DocumentHits(Document &theDocument, int theNbHits)
+    DocumentHits(const Document &theDocument, int theNbHits)
             : document(theDocument), nbHits(theNbHits) {}
 
     /**
@@ -67,7 +67,7 @@ public:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-    Document &document;
+    const Document &document;
     int nbHits = 0;
 };
 

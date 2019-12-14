@@ -26,6 +26,26 @@ class HTTPRequestData {
 //----------------------------------------------------------------- PUBLIC
 public:
 //----------------------------------------------------- Méthodes publiques
+    /**
+     * @return La méthode HTTP de la requête
+     */
+    const string &GetMethod() const {
+        return method;
+    }
+
+    /**
+     * @return L'URL du document ciblé
+     */
+    const string &GetUrl() const {
+        return URL;
+    }
+
+    /**
+     * @return La version du protocole HTTP
+     */
+    const string &GetVersion() const {
+        return version;
+    }
 
 //-------------------------------------------- Constructeurs - destructeur
     /**
@@ -35,8 +55,8 @@ public:
      * @param theURL L'URL du document ciblé
      * @param theVersion La version du protocole HTTP
      */
-    inline HTTPRequestData(string &theMethod, string &theURL, string &theVersion)
-    : method(theMethod), URL(theURL), version(theVersion) {}
+    HTTPRequestData(string theMethod, string theURL, string theVersion)
+            : method(move(theMethod)), URL(move(theURL)), version(move(theVersion)) {}
 
     /**
      * Constructeur par copie du HTTP request data.

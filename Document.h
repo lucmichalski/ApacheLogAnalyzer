@@ -29,20 +29,16 @@ class Document {
 public:
 //----------------------------------------------------- Méthodes publiques
     /**
-     * Retourne le pointeur sur l'URL du document.
-     *
-     * @return Le pointeur sur l'URL du document
+     * @return La référence sur l'URL du document
      */
     const string &GetURL() const {
         return URL;
     }
 
     /**
-     * Retourne le pointeur sur l'extension du document.
-     *
-     * @return Le pointeur sur l'extension du document
+     * @return La chaîne représentant l'extension du document
      */
-    string *GetExtension();
+    string GetExtension();
 
 //-------------------------------------------- Constructeurs - destructeur
     /**
@@ -50,7 +46,7 @@ public:
      *
      * @param url Le pointeur sur l'URL du document à créer
      */
-    explicit Document(string &theURL) : URL(theURL) {}
+    explicit Document(string theURL) : URL(move(theURL)) {}
 
     /**
      * Constructeur par copie d'un document.

@@ -33,10 +33,11 @@ class RequestData {
 //----------------------------------------------------------------- PUBLIC
 public:
 //----------------------------------------------------- Méthodes publiques
+    // TODO : rendre les mutateurs privés mais friend avec la méthode créant le RequestData
     /**
      * @return L'adresse IPv4 du client de la requête HTTP
      */
-    inline string getClientAddress() const {
+    const string &GetClientAddress() const {
         return clientAddress;
     }
 
@@ -45,14 +46,14 @@ public:
      *
      * @param theClientAddress L'adresse IPv4 du client de la requête HTTP
      */
-    inline void setClientAddress(string theClientAddress) {
-        clientAddress = theClientAddress;
+    void SetClientAddress(string theClientAddress) {
+        clientAddress = move(theClientAddress);
     }
 
     /**
      * @return La date de la requête HTTP
      */
-    inline time_t getDate() const {
+    time_t GetDate() const {
         return date;
     }
 
@@ -61,14 +62,14 @@ public:
      *
      * @param theDate La date de la requête HTTP
      */
-    inline void setDate(time_t theDate) {
+    void SetDate(time_t theDate) {
         date = theDate;
     }
 
     /**
      * @return Le code status de la requête HTTP
      */
-    inline int getReturnCode() const {
+    int GetReturnCode() const {
         return returnCode;
     }
 
@@ -77,14 +78,14 @@ public:
      *
      * @param theReturnCode Le code status de la requête HTTP
      */
-    inline void setReturnCode(int theReturnCode) {
+    void SetReturnCode(int theReturnCode) {
         returnCode = theReturnCode;
     }
 
     /**
      * @return La taille de la réponse HTTP en octet
      */
-    inline int getAnswerSize() const {
+    int GetAnswerSize() const {
         return answerSize;
     }
 
@@ -93,14 +94,14 @@ public:
      *
      * @param theAnswerSize La taille de la réponse HTTP en octet
      */
-    inline void setAnswerSize(int theAnswerSize) {
+    void SetAnswerSize(int theAnswerSize) {
         answerSize = theAnswerSize;
     }
 
     /**
      * @return L'URL du Referer de la requête HTTP
      */
-    inline string getRefererUrl() const {
+    const string &GetRefererUrl() const {
         return refererURL;
     }
 
@@ -109,14 +110,14 @@ public:
      *
      * @param theRefererUrl L'URL du Referer de la requête HTTP
      */
-    inline void setRefererUrl(string theRefererUrl) {
-        refererURL = theRefererUrl;
+    void SetRefererUrl(string theRefererUrl) {
+        refererURL = move(theRefererUrl);
     }
 
     /**
      * @return Identifiants du navigateur utilisé lors de l'exécution de la requête
      */
-    inline string getBrowserId() const {
+    const string &GetBrowserId() const {
         return browserId;
     }
 
@@ -125,14 +126,14 @@ public:
      *
      * @param theBrowserId Les identifiants du navigateur utilisé lors de l'exécution de la requête
      */
-    inline void setBrowserId(string theBrowserId) {
-        browserId = theBrowserId;
+    void SetBrowserId(string theBrowserId) {
+        browserId = move(theBrowserId);
     }
 
     /**
      * @return Les informations sur le visiteur ayant exécuté la requête
      */
-    inline RequestVisitor getRequestVisitor() const {
+    const RequestVisitor &GetRequestVisitor() const {
         return requestVisitor;
     }
 
@@ -141,14 +142,14 @@ public:
      *
      * @param theRequestVisitor Les informations sur le visiteur ayant exécuté la requête
      */
-    inline void setRequestVisitor(RequestVisitor theRequestVisitor) {
+    void SetRequestVisitor(RequestVisitor theRequestVisitor) {
         requestVisitor = theRequestVisitor;
     }
 
     /**
      * @return Les informations HTTP sur la requête
      */
-    inline HTTPRequestData getHttpRequestData() const {
+    const HTTPRequestData &GetHttpRequestData() const {
         return httpRequestData;
     }
 
@@ -157,17 +158,11 @@ public:
      *
      * @param theHttpRequestData Les informations HTTP sur la requête
      */
-    inline void setHttpRequestData(HTTPRequestData theHttpRequestData) {
+    void SetHttpRequestData(HTTPRequestData theHttpRequestData) {
         httpRequestData = theHttpRequestData;
     }
 
 //-------------------------------------------- Constructeurs - destructeur
-    /**
-     * Constructeur du request data.
-     * Aucune action spécifique effectuée.
-     */
-    inline RequestData() = default;
-
     /**
      * Constructeur par copie du request data.
      * Aucune action spécifique effectuée.

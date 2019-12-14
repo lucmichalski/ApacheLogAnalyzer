@@ -1,3 +1,7 @@
+#include <utility>
+
+#include <utility>
+
 /*************************************************************************
             RequestData - Représente les données d'une requête
 							 -------------------
@@ -29,14 +33,14 @@ public:
     /**
      * @return Le nom d'utilisateur spécifique aux logs
      */
-    const string &getUserLogName() const {
+    const string &GetUserLogName() const {
         return userLogName;
     }
 
     /**
      * @return Le nom d'utilisateur d'origine
       */
-    const string &getUserName() const {
+    const string &GetUserName() const {
         return userName;
     }
 
@@ -47,8 +51,8 @@ public:
      * @param theUserLogName Le nom d'utilisateur spécifique aux logs
      * @param theUserName Le nom d'utilisateur d'origine
      */
-    inline RequestVisitor(string theUserLogName, string theUserName)
-    : userLogName(theUserLogName), userName(theUserName) {}
+    RequestVisitor(string theUserLogName, string theUserName)
+            : userLogName(move(theUserLogName)), userName(move(theUserName)) {}
 
     /**
      * Constructeur par copie du request visitor.
