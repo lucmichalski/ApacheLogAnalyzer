@@ -35,7 +35,7 @@ public:
      * @param theURL L'URL du document ciblé
      * @param theVersion La version du protocole HTTP
      */
-    inline HTTPRequestData(string theMethod, string theURL, string theVersion)
+    inline HTTPRequestData(string &theMethod, string &theURL, string &theVersion)
     : method(theMethod), URL(theURL), version(theVersion) {}
 
     /**
