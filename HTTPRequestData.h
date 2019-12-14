@@ -1,5 +1,5 @@
 /*************************************************************************
-          Document - Représente un document identifié par une URL
+            RequestData - Représente les données d'une requête
 							 -------------------
 	début                : 11/12/2019
 	copyright            : (C) 2019 par :
@@ -9,67 +9,55 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//-------- Interface de la classe <Document> (fichier Document.h) --------
-#if !defined ( DOCUMENT_H )
-#define DOCUMENT_H
+//- Interface de la classe <HTTPRequestData> (fichier HTTPRequestData.h) -
+#ifndef APACHELOGANALYZER_HTTPREQUESTDATA_H
+#define APACHELOGANALYZER_HTTPREQUESTDATA_H
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 
 using namespace std;
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Document>
-//  La classe document permet de représenter un document par son URL
-//  correspondant à son identifiant uniquement sur le Web.
+// Rôle de la classe <RequestVisitor>
+//  En lien avec le rôle de la classe RequestData
 //------------------------------------------------------------------------
 
-class Document {
+class HTTPRequestData {
 //----------------------------------------------------------------- PUBLIC
-
 public:
 //----------------------------------------------------- Méthodes publiques
-    /**
-     * Retourne le pointeur sur l'URL du document.
-     *
-     * @return Le pointeur sur l'URL du document
-     */
-    inline const string *GetURL() const {
-        return URL;
-    }
-
-    /**
-     * Retourne le pointeur sur l'extension du document.
-     *
-     * @return Le pointeur sur l'extension du document
-     */
-    string *GetExtension();
 
 //-------------------------------------------- Constructeurs - destructeur
     /**
-     * Constructeur d'un document.
+     * Constructeur du HTTP request data
      *
-     * @param url Le pointeur sur l'URL du document à créer
+     * @param theMethod La méthode HTTP de la requête
+     * @param theURL L'URL du document ciblé
+     * @param theVersion La version du protocole HTTP
      */
-    Document(string *theURL);
+    inline HTTPRequestData(string theMethod, string theURL, string theVersion)
+    : method(theMethod), URL(theURL), version(theVersion) {}
 
     /**
-     * Constructeur par copie d'un document.
+     * Constructeur par copie du HTTP request data.
+     * Aucune action spécifique effectuée.
      *
-     * @param document La référence du document à copier
+     * @param requestData La référence à l'HTTP request data à copier
      */
-    Document(const Document &document);
+    HTTPRequestData(const HTTPRequestData &httpRequestData) = default;
 
     /**
-     * Destructeur du document.
-     * La string de l'attribut URL est également détruit.
+     * Destructeur du request HTTP request data.
+     * Aucune action spécifique effectuée.
      */
-    virtual ~Document();
+    ~HTTPRequestData() = default;
 
 //------------------------------------------------------------------ PRIVE
-
 protected:
 //----------------------------------------------------- Attributs protégés
-    string *URL;
+    string method;
+    string URL;
+    string version;
 };
 
-#endif // DOCUMENT_H
+#endif //APACHELOGANALYZER_HTTPREQUESTDATA_H

@@ -31,7 +31,7 @@ string *Document::GetExtension() {
  *
  * @param url Le pointeur sur une string de l'URL du document à instancier
  */
-Document::Document(string *url) : URL(url) {}
+Document::Document(string *theURL) : URL(theURL) {}
 
 /**
  * Copie le document dans une nouvelle instance avec une copie en profondeur

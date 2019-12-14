@@ -18,4 +18,4 @@ add_executable(ApacheLogAnalyzer
         Main.h
         MainImpl.cpp
         Request.h
-        Request.cpp Document.cpp Log.cpp)
+        Request.cpp Document.cpp Log.cpp RequestData.h RequestVisitor.h HTTPRequestData.h)
