@@ -73,3 +73,17 @@ const Document *Log::getDocument(const string &URL) const {
     }
     return nullptr;
 }
+
+/**
+ * Parcours l'ensemble des requêtes du Log pour trouver une correspondance avec les paramètres spécifiés.
+ */
+const Request *Log::getRequest(const Document &srcDocument, const Document &destDocument, time_t date) const {
+    for (const Request *request : *requests) {
+        if (request->GetSrcDocument() == srcDocument
+            && request->GetDestDocument() == destDocument
+            && request->GetDate() == date) {
+            return request;
+        }
+    }
+    return nullptr;
+}

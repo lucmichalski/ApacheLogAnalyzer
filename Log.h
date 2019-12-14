@@ -95,6 +95,16 @@ protected:
      */
     const Document *getDocument(const string &URL) const;
 
+    /**
+     * Cherche et retourne le pointeur sur la requête associée aux paramètres spécifiés si elle existe, nullptr sinon
+     *
+     * @param srcDocument Le document source de la requête
+     * @param destDocument Le document destination de la requête
+     * @param date La date de la requête
+     * @return Le pointeur sur la requête si elle existe, nullptr sinon
+     */
+    const Request *getRequest(const Document &srcDocument, const Document &destDocument, time_t date) const;
+
 //----------------------------------------------------- Attributs protégés
     unordered_set<const Request *> *requests = nullptr;
     unordered_set<const Document *> *documents = nullptr;

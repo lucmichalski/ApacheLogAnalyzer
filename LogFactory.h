@@ -9,30 +9,34 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//------ Interface de la classe <LogFactory> (fichier LogFactory.h) ------
 #ifndef APACHELOGANALYZER_LOGFACTORY_H
 #define APACHELOGANALYZER_LOGFACTORY_H
-//--------------------------------------------------- Interfaces utilisées
 
-//------------------------------------------------------------------------
-// Rôle de la classe <LogFactory>
-//  LogFactory a pour rôle d'instancier la classe Log ainsi que les classes
-//  associées (Document et Request) en se basant sur les lignes des logs
-//  importées.
-//------------------------------------------------------------------------
+#include "Log.h"
+#include "RequestData.h"
 
+/**
+ * LogFactory a pour rôle d'instancier la classe Log ainsi que les classes associées (Document et Request)
+ * en se basant sur les lignes des logs importées.
+ */
 class LogFactory {
-//----------------------------------------------------------------- PUBLIC
 public:
-//----------------------------------------------------- Méthodes publiques
-
-//-------------------------------------------- Constructeurs - destructeur
-
-//------------------------------------------------------------------ PRIVE
-
-protected:
-//----------------------------------------------------- Attributs protégés
+    /**
+     * Créer un Log ainsi que les Request et Document associés et le retourne ensuite.
+     * La suppression du log est à la charge de l'appelant.
+     *
+     * @param logLines Les lignes du fichier de log importé
+     * @return Le Log créée
+     */
+    Log *CreateLog(unordered_set<string *> *logLines) const;
+private:
+    /**
+     * Analyse la ligne passée en paramètre et retourne le request data correspondant.
+     *
+     * @param logLine La ligne de log à analyser
+     * @return Le request data correspondant aux données de la ligne de log
+     */
+    const RequestData analyzeLogLine(const string &logLine) const;
 };
-
 
 #endif //APACHELOGANALYZER_LOGFACTORY_H
