@@ -1,7 +1,3 @@
-#include <utility>
-
-#include <utility>
-
 /*************************************************************************
             RequestData - Représente les données d'une requête
 							 -------------------
@@ -13,23 +9,18 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//-- Interface de la classe <RequestVisitor> (fichier RequestVisitor.h) --
 #ifndef APACHELOGANALYZER_REQUESTVISITOR_H
 #define APACHELOGANALYZER_REQUESTVISITOR_H
-//--------------------------------------------------- Interfaces utilisées
+
 #include <string>
 
 using namespace std;
 
-//------------------------------------------------------------------------
-// Rôle de la classe <RequestVisitor>
-//  En lien avec le rôle de la classe RequestData
-//------------------------------------------------------------------------
-
+/**
+ * Le rôle de la classe RequestVisitor est en lien avec celui de la classe RequestData
+ */
 class RequestVisitor {
-//----------------------------------------------------------------- PUBLIC
 public:
-//----------------------------------------------------- Méthodes publiques
     /**
      * @return Le nom d'utilisateur spécifique aux logs
      */
@@ -44,7 +35,6 @@ public:
         return userName;
     }
 
-//-------------------------------------------- Constructeurs - destructeur
     /**
      * Constructeur par défaut du request visitor.
      * Comportement par défaut.
@@ -54,11 +44,11 @@ public:
     /**
      * Constructeur du request visitor.
      *
-     * @param theUserLogName Le nom d'utilisateur spécifique aux logs
-     * @param theUserName Le nom d'utilisateur d'origine
+     * @param _userLogName Le nom d'utilisateur spécifique aux logs
+     * @param _userName Le nom d'utilisateur d'origine
      */
-    RequestVisitor(string theUserLogName, string theUserName)
-            : userLogName(move(theUserLogName)), userName(move(theUserName)) {}
+    RequestVisitor(string _userLogName, string _userName)
+            : userLogName(move(_userLogName)), userName(move(_userName)) {}
 
     /**
      * Constructeur par copie du request visitor.
@@ -74,9 +64,7 @@ public:
      */
     virtual ~RequestVisitor() = default;
 
-//------------------------------------------------------------------ PRIVE
 protected:
-//----------------------------------------------------- Attributs protégés
     string userLogName;
     string userName;
 };

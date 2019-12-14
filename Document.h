@@ -9,25 +9,19 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//-------- Interface de la classe <Document> (fichier Document.h) --------
-#if !defined ( DOCUMENT_H )
-#define DOCUMENT_H
-//--------------------------------------------------- Interfaces utilisées
+#ifndef APACHELOGANALYZER_DOCUMENT_H
+#define APACHELOGANALYZER_DOCUMENT_H
+
 #include <string>
 
 using namespace std;
 
-//------------------------------------------------------------------------
-// Rôle de la classe <Document>
-//  La classe document permet de représenter un document par son URL
-//  correspondant à son identifiant uniquement sur le Web.
-//------------------------------------------------------------------------
-
+/**
+ * La classe document permet de représenter un document par son URL correspondant
+ * à son identifiant uniquement sur le Web.
+ */
 class Document {
-//----------------------------------------------------------------- PUBLIC
-
 public:
-//----------------------------------------------------- Méthodes publiques
     /**
      * Opérateur d'égalité. Test si le document courant et le document passé en paramètre
      * sont égaux (comparaison des URLs).
@@ -35,7 +29,7 @@ public:
      * @param document Le second document de comparaison
      * @return "true" si les deux documents sont égaux, "false" sinon
      */
-    bool operator ==(const Document &document) const {
+    bool operator==(const Document &document) const {
         return GetURL() == document.GetURL();
     }
 
@@ -51,13 +45,12 @@ public:
      */
     string GetExtension();
 
-//-------------------------------------------- Constructeurs - destructeur
     /**
      * Constructeur d'un document.
      *
      * @param url Le pointeur sur l'URL du document à créer
      */
-    explicit Document(string theURL) : URL(move(theURL)) {}
+    explicit Document(string _URL) : URL(move(_URL)) {}
 
     /**
      * Constructeur par copie d'un document.
@@ -73,11 +66,8 @@ public:
      */
     virtual ~Document() = default;
 
-//------------------------------------------------------------------ PRIVE
-
 protected:
-//----------------------------------------------------- Attributs protégés
     string URL;
 };
 
-#endif // DOCUMENT_H
+#endif //APACHELOGANALYZER_DOCUMENT_H

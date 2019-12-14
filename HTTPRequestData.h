@@ -9,23 +9,18 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//- Interface de la classe <HTTPRequestData> (fichier HTTPRequestData.h) -
 #ifndef APACHELOGANALYZER_HTTPREQUESTDATA_H
 #define APACHELOGANALYZER_HTTPREQUESTDATA_H
-//--------------------------------------------------- Interfaces utilisées
+
 #include <string>
 
 using namespace std;
 
-//------------------------------------------------------------------------
-// Rôle de la classe <RequestVisitor>
-//  En lien avec le rôle de la classe RequestData
-//------------------------------------------------------------------------
-
+/**
+ * Le rôle de la classe HTTPRequestData est en lien avec celui de la classe RequestData
+ */
 class HTTPRequestData {
-//----------------------------------------------------------------- PUBLIC
 public:
-//----------------------------------------------------- Méthodes publiques
     /**
      * @return La méthode HTTP de la requête
      */
@@ -47,7 +42,6 @@ public:
         return version;
     }
 
-//-------------------------------------------- Constructeurs - destructeur
     /**
      * Constructeur par défaut du HTTP request data
      * Comportement par défaut.
@@ -57,18 +51,18 @@ public:
     /**
      * Constructeur du HTTP request data
      *
-     * @param theMethod La méthode HTTP de la requête
-     * @param theURL L'URL du document ciblé
-     * @param theVersion La version du protocole HTTP
+     * @param _method La méthode HTTP de la requête
+     * @param _URL L'URL du document ciblé
+     * @param _version La version du protocole HTTP
      */
-    HTTPRequestData(string theMethod, string theURL, string theVersion)
-            : method(move(theMethod)), URL(move(theURL)), version(move(theVersion)) {}
+    HTTPRequestData(string _method, string _URL, string _version)
+            : method(move(_method)), URL(move(_URL)), version(move(_version)) {}
 
     /**
      * Constructeur par copie du HTTP request data.
      * Aucune action spécifique effectuée.
      *
-     * @param requestData La référence à l'HTTP request data à copier
+     * @param httpRequestData La référence à l'HTTP request data à copier
      */
     HTTPRequestData(const HTTPRequestData &httpRequestData) = default;
 
@@ -78,9 +72,7 @@ public:
      */
     virtual ~HTTPRequestData() = default;
 
-//------------------------------------------------------------------ PRIVE
 protected:
-//----------------------------------------------------- Attributs protégés
     string method;
     string URL;
     string version;

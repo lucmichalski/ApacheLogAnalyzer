@@ -9,22 +9,16 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//---- Interface de la classe <DocumentHits> (fichier DocumentHits.h) ----
 #ifndef APACHELOGANALYZER_DOCUMENTHITS_H
 #define APACHELOGANALYZER_DOCUMENTHITS_H
-//--------------------------------------------------- Interfaces utilisées
+
 #include "Document.h"
 
-//------------------------------------------------------------------------
-// Rôle de la classe <DocumentHits>
-//  DocumentHits est un conteneur associant un document à son nombre de
-//  hits.
-//------------------------------------------------------------------------
-
+/**
+ * DocumentHits est une classe associant un document à son nombre de hits.
+ */
 class DocumentHits {
-//----------------------------------------------------------------- PUBLIC
 public:
-//----------------------------------------------------- Méthodes publiques
     /**
      * @return La référence constante au document associé au nombre de hits
      */
@@ -39,15 +33,14 @@ public:
         return nbHits;
     }
 
-//-------------------------------------------- Constructeurs - destructeur
     /**
      * Constructeur de l'association document - nombre de hits
      *
-     * @param theDocument La référence au document à associer au nombre de hits
-     * @param theNbHits Le nombre de hits du document associé
+     * @param _document La référence au document à associer au nombre de hits
+     * @param _nbHits Le nombre de hits du document associé
      */
-    DocumentHits(const Document &theDocument, int theNbHits)
-            : document(theDocument), nbHits(theNbHits) {}
+    DocumentHits(const Document &_document, int _nbHits)
+            : document(_document), nbHits(_nbHits) {}
 
     /**
      * Constructeur par copie.
@@ -63,10 +56,7 @@ public:
      */
     virtual ~DocumentHits() = default;
 
-//------------------------------------------------------------------ PRIVE
-
 protected:
-//----------------------------------------------------- Attributs protégés
     const Document &document;
     int nbHits = 0;
 };

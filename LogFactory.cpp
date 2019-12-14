@@ -15,9 +15,6 @@
  * Parcours et analyse l'ensemble des lignes de log et créer progressivement
  * l'instance de la classe Log en créant également des instances de Request
  * et Document.
- *
- * @param logLines Les lignes du fichier de log importé
- * @return Le Log créée
  */
 Log *LogFactory::CreateLog(unordered_set<string *> *logLines) const {
     Log *log = new Log();
@@ -42,6 +39,10 @@ Log *LogFactory::CreateLog(unordered_set<string *> *logLines) const {
     return log;
 }
 
+/**
+ * Créer une instance de la classe RequestData à partir des groupes générés par la Regex pour la lecture de ligne
+ * du fichier de log importé.
+ */
 const RequestData LogFactory::analyzeLogLine(const string &logLine) const {
     RequestData requestData;
     // TODO : Regex

@@ -9,10 +9,9 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//----- Interface de la classe <RequestData> (fichier RequestData.h) -----
 #ifndef APACHELOGANALYZER_REQUESTDATA_H
 #define APACHELOGANALYZER_REQUESTDATA_H
-//--------------------------------------------------- Interfaces utilisées
+
 #include <string>
 #include <ctime>
 #include "RequestVisitor.h"
@@ -20,20 +19,15 @@
 
 using namespace std;
 
-//------------------------------------------------------------------------
-// Rôle de la classe <RequestData>
-//  RequestData contient l'ensemble des données de la requête associée
-//  (adresse IP, date, document ciblé, navigateur utilisé, ...).
-//  Son rôle est d'organiser les données lu de la ligne de requête importé
-//  du fichier de log lu afin de simplifier leur exploitation au sein
-//  de l'application.
-//------------------------------------------------------------------------
-
+/**
+ * RequestData contient l'ensemble des données de la requête associée (adresse IP, date, document ciblé,
+ * navigateur utilisé, ...).
+ * Son rôle est d'organiser les données lu de la ligne de requête importé du fichier de log lu afin de simplifier
+ * leur exploitation au sein de l'application.
+ */
 class RequestData {
-//----------------------------------------------------------------- PUBLIC
-public:
-//----------------------------------------------------- Méthodes publiques
     // TODO : rendre les mutateurs privés mais friend avec la méthode créant le RequestData
+public:
     /**
      * @return L'adresse IPv4 du client de la requête HTTP
      */
@@ -44,10 +38,10 @@ public:
     /**
      * Définit l'adresse IPv4 du client de la requête HTTP.
      *
-     * @param theClientAddress L'adresse IPv4 du client de la requête HTTP
+     * @param _clientAddress L'adresse IPv4 du client de la requête HTTP
      */
-    void SetClientAddress(string theClientAddress) {
-        clientAddress = move(theClientAddress);
+    void SetClientAddress(string _clientAddress) {
+        clientAddress = move(_clientAddress);
     }
 
     /**
@@ -60,10 +54,10 @@ public:
     /**
      * Définit la date de la requête HTTP.
      *
-     * @param theDate La date de la requête HTTP
+     * @param _date La date de la requête HTTP
      */
-    void SetDate(time_t theDate) {
-        date = theDate;
+    void SetDate(time_t _date) {
+        date = _date;
     }
 
     /**
@@ -76,10 +70,10 @@ public:
     /**
      * Définit le code status de la requête HTTP.
      *
-     * @param theReturnCode Le code status de la requête HTTP
+     * @param _returnCode Le code status de la requête HTTP
      */
-    void SetReturnCode(int theReturnCode) {
-        returnCode = theReturnCode;
+    void SetReturnCode(int _returnCode) {
+        returnCode = _returnCode;
     }
 
     /**
@@ -92,10 +86,10 @@ public:
     /**
      * Définit la taille de la réponse HTTP en octet.
      *
-     * @param theAnswerSize La taille de la réponse HTTP en octet
+     * @param _answerSize La taille de la réponse HTTP en octet
      */
-    void SetAnswerSize(int theAnswerSize) {
-        answerSize = theAnswerSize;
+    void SetAnswerSize(int _answerSize) {
+        answerSize = _answerSize;
     }
 
     /**
@@ -108,10 +102,10 @@ public:
     /**
      * Définit l'URL du Referer de la requête HTTP.
      *
-     * @param theRefererUrl L'URL du Referer de la requête HTTP
+     * @param _refererUrl L'URL du Referer de la requête HTTP
      */
-    void SetRefererUrl(string theRefererUrl) {
-        refererURL = move(theRefererUrl);
+    void SetRefererUrl(string _refererUrl) {
+        refererURL = move(_refererUrl);
     }
 
     /**
@@ -124,10 +118,10 @@ public:
     /**
      * Définit les identifiants du navigateur utilisé lors de l'exécution de la requête.
      *
-     * @param theBrowserId Les identifiants du navigateur utilisé lors de l'exécution de la requête
+     * @param _browserId Les identifiants du navigateur utilisé lors de l'exécution de la requête
      */
-    void SetBrowserId(string theBrowserId) {
-        browserId = move(theBrowserId);
+    void SetBrowserId(string _browserId) {
+        browserId = move(_browserId);
     }
 
     /**
@@ -140,10 +134,10 @@ public:
     /**
      * Définit les informations sur le visiteur ayant exécuté la requête.
      *
-     * @param theRequestVisitor Les informations sur le visiteur ayant exécuté la requête
+     * @param _requestVisitor Les informations sur le visiteur ayant exécuté la requête
      */
-    void SetRequestVisitor(RequestVisitor theRequestVisitor) {
-        requestVisitor = theRequestVisitor;
+    void SetRequestVisitor(RequestVisitor _requestVisitor) {
+        requestVisitor = _requestVisitor;
     }
 
     /**
@@ -156,13 +150,12 @@ public:
     /**
      * Définit les informations HTTP sur la requête.
      *
-     * @param theHttpRequestData Les informations HTTP sur la requête
+     * @param _httpRequestData Les informations HTTP sur la requête
      */
-    void SetHttpRequestData(HTTPRequestData theHttpRequestData) {
-        httpRequestData = theHttpRequestData;
+    void SetHttpRequestData(HTTPRequestData _httpRequestData) {
+        httpRequestData = _httpRequestData;
     }
 
-//-------------------------------------------- Constructeurs - destructeur
     /**
      * Constructeur par défaut du request data.
      * Comportement par défaut.
@@ -183,10 +176,7 @@ public:
      */
     virtual ~RequestData() = default;
 
-//------------------------------------------------------------------ PRIVE
-
 protected:
-//----------------------------------------------------- Attributs protégés
     string clientAddress;
     time_t date = 0;
     int returnCode = 0;

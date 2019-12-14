@@ -29,7 +29,8 @@ public:
      * @return Le Log créée
      */
     Log *CreateLog(unordered_set<string *> *logLines) const;
-private:
+
+protected:
     /**
      * Analyse la ligne passée en paramètre et retourne le request data correspondant.
      *

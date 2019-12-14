@@ -9,9 +9,6 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//----------- Réalisation de la classe <Log> (fichier Log.cpp) -----------
-
-//---------------------------------------------------------------- INCLUDE
 #include "Log.h"
 
 /**
@@ -25,8 +22,6 @@ Log::Log() {
 /**
  * Copie les ensembles du log spécifié dans le log en création.
  * Seuls les pointeurs des éléments des ensembles sont copiés.
- *
- * @param log La référence au log à copier
  */
 Log::Log(const Log &log) {
     documents = new unordered_set<const Document *>();
@@ -61,9 +56,6 @@ Log::~Log() {
 
 /**
  * Parcours l'ensemble des documents du Log pour trouver une correspondance avec l'URL spécifiée en paramètre.
- *
- * @param URL La référence à l'URL du document à rechercher
- * @return Le pointeur du document associé à l'URL s'il existe, nullptr sinon
  */
 const Document *Log::getDocument(const string &URL) const {
     for (const Document *document : *documents) {

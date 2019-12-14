@@ -1,7 +1,3 @@
-#include <utility>
-
-#include <utility>
-
 /*************************************************************************
 ApplicationArguments - Arguments spécifiés à l'application lors de son lancement
 							 -------------------
@@ -13,25 +9,20 @@ ApplicationArguments - Arguments spécifiés à l'application lors de son lancem
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-// Interface de la classe <ApplicationArguments> (fichier ApplicationArguments.h)
 #ifndef APACHELOGANALYZER_APPLICATIONARGUMENTS_H
 #define APACHELOGANALYZER_APPLICATIONARGUMENTS_H
-//--------------------------------------------------- Interfaces utilisées
+
 #include <string>
 
 using namespace std;
 
-//------------------------------------------------------------------------
-// Rôle de la classe <ApplicationArguments>
-//  ApplicationArguments contient l'ensemble des données sur les arguments
-//  de l'application spécifiés au lancement de celle-ci. Il s'agit
-//  d'un simple conteneur sans logique.
-//------------------------------------------------------------------------
-
+/**
+ * ApplicationArguments contient l'ensemble des données sur les arguments de l'application spécifiés au lancement
+ * de celle-ci. Il s'agit d'un simple conteneur sans logique d'implémenter (responsabilité déléguée au reste
+ * du programme).
+ */
 class ApplicationArguments {
-//----------------------------------------------------------------- PUBLIC
 public:
-//----------------------------------------------------- Méthodes publiques
     /**
      * @return La référence sur le nom du fichier de log à importer
      */
@@ -61,19 +52,18 @@ public:
         return dotFileName;
     }
 
-//-------------------------------------------- Constructeurs - destructeur
     /**
      * Constructeur des arguments de l'application.
      *
-     * @param theLogFileName Le nom du fichier de log à importer
-     * @param isExcludeExtensions "true" si les extensions css, image et js doivent être exclus, "false" sinon
-     * @param theFilterHour L'heure à utiliser pour le filtrage du log (entre 0 et 23), -1 si aucun filtrage
-     * @param theDotFileName Le nom du fichier .dot (de l'application GraphViz) à générer, chaîne vide si aucun fichier
+     * @param _logFileName Le nom du fichier de log à importer
+     * @param _excludeExtensions "true" si les extensions css, image et js doivent être exclus, "false" sinon
+     * @param _filterHour L'heure à utiliser pour le filtrage du log (entre 0 et 23), -1 si aucun filtrage
+     * @param _dotFileName Le nom du fichier .dot (de l'application GraphViz) à générer, chaîne vide si aucun fichier
      *      à générer
      */
-    ApplicationArguments(string theLogFileName, bool isExcludeExtensions, int theFilterHour, string theDotFileName)
-            : logFileName(move(theLogFileName)), excludeExtensions(isExcludeExtensions), filterHour(theFilterHour),
-              dotFileName(move(theDotFileName)) {}
+    ApplicationArguments(string _logFileName, bool _excludeExtensions, int _filterHour, string _dotFileName)
+            : logFileName(move(_logFileName)), excludeExtensions(_excludeExtensions), filterHour(_filterHour),
+              dotFileName(move(_dotFileName)) {}
 
     /**
      * Constructeur par copie.
@@ -87,10 +77,7 @@ public:
      */
     virtual ~ApplicationArguments() = default;
 
-//------------------------------------------------------------------ PRIVE
-
 protected:
-//----------------------------------------------------- Attributs protégés
     string logFileName;
     bool excludeExtensions = false;
     int filterHour = -1;

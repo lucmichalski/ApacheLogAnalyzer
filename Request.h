@@ -9,26 +9,18 @@ Request  -  Représente une requête HTTP enregistrée dans le fichier de log im
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//--------- Interface de la classe <Request> (fichier Request.h) ---------
-#if !defined ( REQUEST_H )
-#define REQUEST_H
+#ifndef APACHELOGANALYZER_REQUEST_H
+#define APACHELOGANALYZER_REQUEST_H
 
-//--------------------------------------------------- Interfaces utilisées
 #include <ctime>
 #include "Document.h"
 
-//------------------------------------------------------------------------
-// Rôle de la classe <Request>
-//  La classe Request représente une requête passée et stockée dans le
-//  fichier de log importé. Elle a pour rôle d'associer un document source
-//  à un document destination pour une date donnée.
-//------------------------------------------------------------------------
-
+/**
+ * La classe Request représente une requête passée et stockée dans le fichier de log importé.
+ * Elle a pour rôle d'associer un document source à un document destination pour une date donnée.
+ */
 class Request {
-//----------------------------------------------------------------- PUBLIC
-
 public:
-//----------------------------------------------------- Méthodes publiques
     /**
      * @return La référence sur le document source de la requête HTTP.
      */
@@ -52,16 +44,15 @@ public:
         return date;
     }
 
-//-------------------------------------------- Constructeurs - destructeur
     /**
      * Constructeur d'une requête HTTP.
      *
-     * @param source Le pointeur du document source de la requête
-     * @param destination Le pointeur du document destination de la requête
-     * @param time La date de la requête
+     * @param _srcDocument Le pointeur du document source de la requête
+     * @param _destDocument Le pointeur du document destination de la requête
+     * @param _date La date de la requête
      */
-    Request(const Document &source, const Document &destination, time_t time)
-            : srcDocument(source), destDocument(destination), date(time) {}
+    Request(const Document &_srcDocument, const Document &_destDocument, time_t _date)
+            : srcDocument(_srcDocument), destDocument(_destDocument), date(_date) {}
 
     /**
      * Constructeur par copie d'une requête HTTP.
@@ -77,13 +68,10 @@ public:
      */
     virtual ~Request() = default;
 
-//------------------------------------------------------------------ PRIVE
-
 protected:
-//----------------------------------------------------- Attributs protégés
     const Document &srcDocument;
     const Document &destDocument;
     time_t date = 0;
 };
 
-#endif // REQUEST_H
+#endif //APACHELOGANALYZER_REQUEST_H

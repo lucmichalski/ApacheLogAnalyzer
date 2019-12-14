@@ -9,26 +9,20 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//------------- Interface de la classe <Log> (fichier Log.h) -------------
-#if !defined ( LOG_H )
-#define LOG_H
-//--------------------------------------------------- Interfaces utilisées
+#ifndef APACHELOGANALYZER_LOG_H
+#define APACHELOGANALYZER_LOG_H
+
 #include <unordered_set>
 #include "Request.h"
 
 using namespace std;
 
-//------------------------------------------------------------------------
-// Rôle de la classe <Log>
-//  Représente le fichier de log importé en étant associé à la liste des
-//  requêtes Request et la liste des documents Document.
-//------------------------------------------------------------------------
-
+/**
+ * La classe Log représente le fichier de log importé en étant associé à la liste des
+ * requêtes Request et la liste des documents Document.
+ */
 class Log {
-//----------------------------------------------------------------- PUBLIC
-
 public:
-//----------------------------------------------------- Méthodes publiques
     /**
      * @return Le pointeur sur l'ensemble des requêtes du log
      */
@@ -43,7 +37,6 @@ public:
         return documents;
     }
 
-//-------------------------------------------- Constructeurs - destructeur
     /**
      * Constructeur du log.
      * Initialise les ensembles de requêtes et de documents.
@@ -64,11 +57,9 @@ public:
      */
     virtual ~Log();
 
-//------------------------------------------------------------------ PRIVE
-
 protected:
     friend class LogFactory;
-//----------------------------------------------------- Méthodes protégées
+
     /**
      * Ajoute une requête au Log.
      *
@@ -105,9 +96,8 @@ protected:
      */
     const Request *getRequest(const Document &srcDocument, const Document &destDocument, time_t date) const;
 
-//----------------------------------------------------- Attributs protégés
     unordered_set<const Request *> *requests = nullptr;
     unordered_set<const Document *> *documents = nullptr;
 };
 
-#endif // LOG_H
+#endif //APACHELOGANALYZER_LOG_H
