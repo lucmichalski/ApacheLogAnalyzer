@@ -33,7 +33,7 @@ public:
      *
      * @return Le pointeur sur l'URL du document
      */
-    inline const string *GetURL() const {
+    const string &GetURL() const {
         return URL;
     }
 
@@ -50,26 +50,27 @@ public:
      *
      * @param url Le pointeur sur l'URL du document à créer
      */
-    Document(string *theURL);
+    explicit Document(string &theURL) : URL(theURL) {}
 
     /**
      * Constructeur par copie d'un document.
+     * Comportement par défaut.
      *
      * @param document La référence du document à copier
      */
-    Document(const Document &document);
+    Document(const Document &document) = default;
 
     /**
      * Destructeur du document.
-     * La string de l'attribut URL est également détruit.
+     * Comportement par défaut.
      */
-    virtual ~Document();
+    virtual ~Document() = default;
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Attributs protégés
-    string *URL;
+    string URL;
 };
 
 #endif // DOCUMENT_H

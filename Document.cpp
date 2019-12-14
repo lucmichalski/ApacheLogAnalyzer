@@ -22,30 +22,5 @@
  */
 string *Document::GetExtension() {
     // TODO : Récupérer l'extension de l'URL du document
-    return new string(*URL); // A remplacer....
-}
-
-/**
- * Créer l'instance de la classe Document à partir du pointeur sur
- * la string de l'URL associée (copie de surface).
- *
- * @param url Le pointeur sur une string de l'URL du document à instancier
- */
-Document::Document(string *theURL) : URL(theURL) {}
-
-/**
- * Copie le document dans une nouvelle instance avec une copie en profondeur
- * de l'attribut URL.
- *
- * @param document Une référence au document à copier
- */
-Document::Document(const Document &document) {
-    URL = new string(*document.GetURL());
-}
-
-/**
- * Détruit l'instance en détruisant l'attribut URL.
- */
-Document::~Document() {
-    delete URL;
+    return new string(URL); // A remplacer...
 }

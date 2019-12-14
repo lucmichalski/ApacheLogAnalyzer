@@ -180,7 +180,7 @@ public:
      * Destructeur du request data.
      * Aucune action spécifique effectuée.
      */
-    ~RequestData() = default;
+    virtual ~RequestData() = default;
 
 //------------------------------------------------------------------ PRIVE
 

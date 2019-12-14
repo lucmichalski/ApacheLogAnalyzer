@@ -62,7 +62,7 @@ public:
      * Destructeur du request visitor.
      * Aucune action spécifique effectuée.
      */
-    ~RequestVisitor() = default;
+    virtual ~RequestVisitor() = default;
 
 //------------------------------------------------------------------ PRIVE
 protected:

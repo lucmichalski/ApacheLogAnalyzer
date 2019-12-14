@@ -50,7 +50,7 @@ public:
      * Destructeur du request HTTP request data.
      * Aucune action spécifique effectuée.
      */
-    ~HTTPRequestData() = default;
+    virtual ~HTTPRequestData() = default;
 
 //------------------------------------------------------------------ PRIVE
 protected:

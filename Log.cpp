@@ -29,8 +29,9 @@ Log::Log() {
  * @param log La référence au log à copier
  */
 Log::Log(const Log &log) {
-    requests = new unordered_set<Request>(*log.requests);
-    documents = new unordered_set<Document>(*log.documents);
+    documents = new unordered_set<Document>();
+    requests = new unordered_set<Request>();
+    // TODO : à compléter, copie intelligente des documents et requests
 }
 
 /**

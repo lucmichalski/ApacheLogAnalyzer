@@ -30,20 +30,16 @@ class Request {
 public:
 //----------------------------------------------------- Méthodes publiques
     /**
-     * Retourne un pointeur sur le document source de la requête HTTP.
-     *
-     * @return Le pointeur sur le document source de la requête HTTP.
+     * @return La référence sur le document source de la requête HTTP.
      */
-    inline const Document *GetSrcDocument() const {
+    const Document &GetSrcDocument() const {
         return srcDocument;
     }
 
     /**
-     * Retourne le pointeur sur le document destination de la requête HTTP.
-     *
-     * @return Le pointeur sur le document destination de la requête HTTP.
+     * @return La référence sur le document destination de la requête HTTP.
      */
-    inline const Document *GetDestDocument() const {
+    const Document &GetDestDocument() const {
         return destDocument;
     }
 
@@ -52,7 +48,7 @@ public:
      *
      * @return La date de la requête HTTP.
      */
-    inline const time_t &GetDate() const {
+    const time_t GetDate() const {
         return date;
     }
 
@@ -64,29 +60,30 @@ public:
      * @param destination Le pointeur du document destination de la requête
      * @param time La date de la requête
      */
-    Request(Document *source, Document *destination, time_t time);
+    Request(Document &source, Document &destination, time_t time)
+            : srcDocument(source), destDocument(destination), date(time) {}
 
     /**
      * Constructeur par copie d'une requête HTTP.
-     * Les documents pointés sont également copiés.
+     * Comportement par défaut.
      *
      * @param request Une référence à la requête à copier
      */
-    Request(const Request &request);
+    Request(const Request &request) = default;
 
     /**
      * Destructeur d'une requête HTTP.
-     * Les documents pointés sont également détruits.
+     * Comportement par défaut.
      */
-    virtual ~Request();
+    virtual ~Request() = default;
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Attributs protégés
-    Document *srcDocument;
-    Document *destDocument;
-    time_t date;
+    Document &srcDocument;
+    Document &destDocument;
+    time_t date = 0;
 };
 
 #endif // REQUEST_H
