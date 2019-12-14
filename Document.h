@@ -29,6 +29,17 @@ class Document {
 public:
 //----------------------------------------------------- Méthodes publiques
     /**
+     * Opérateur d'égalité. Test si le document courant et le document passé en paramètre
+     * sont égaux (comparaison des URLs).
+     *
+     * @param document Le second document de comparaison
+     * @return "true" si les deux documents sont égaux, "false" sinon
+     */
+    bool operator ==(const Document &document) const {
+        return GetURL() == document.GetURL();
+    }
+
+    /**
      * @return La référence sur l'URL du document
      */
     const string &GetURL() const {
