@@ -164,6 +164,12 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     /**
+     * Constructeur par défaut du request data.
+     * Comportement par défaut.
+     */
+    RequestData() = default;
+
+    /**
      * Constructeur par copie du request data.
      * Aucune action spécifique effectuée.
      *

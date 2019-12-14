@@ -46,6 +46,12 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     /**
+     * Constructeur par défaut du request visitor.
+     * Comportement par défaut.
+     */
+    RequestVisitor() = default;
+
+    /**
      * Constructeur du request visitor.
      *
      * @param theUserLogName Le nom d'utilisateur spécifique aux logs

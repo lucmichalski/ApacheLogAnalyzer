@@ -49,6 +49,12 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     /**
+     * Constructeur par défaut du HTTP request data
+     * Comportement par défaut.
+     */
+    HTTPRequestData() = default;
+
+    /**
      * Constructeur du HTTP request data
      *
      * @param theMethod La méthode HTTP de la requête
