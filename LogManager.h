@@ -9,29 +9,21 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-//------ Interface de la classe <LogManager> (fichier LogManager.h) ------
 #ifndef APACHELOGANALYZER_LOGMANAGER_H
 #define APACHELOGANALYZER_LOGMANAGER_H
-//--------------------------------------------------- Interfaces utilisées
 
-//------------------------------------------------------------------------
-// Rôle de la classe <LogManager>
-//  LogManager met à disposition un ensemble de services permettant
-//  de gérer tout l'aspect traitement des logs importés de l'application
-//  (filtrage, tri par nombre de hits, etc).
-//------------------------------------------------------------------------
+#include "Log.h"
 
+/**
+ * LogManager met à disposition un ensemble de services permettant de gérer tout l'aspect traitement
+ * des logs importés de l'application (filtrage, tri par nombre de hits, etc).
+ */
 class LogManager {
-//----------------------------------------------------------------- PUBLIC
 public:
-//----------------------------------------------------- Méthodes publiques
+    const Log *filterByExtensions(const Log &_log);
 
-//-------------------------------------------- Constructeurs - destructeur
-
-//------------------------------------------------------------------ PRIVE
-
+    const Log *filterByHour(const Log &_log, int hour);
 protected:
-//----------------------------------------------------- Attributs protégés
 };
 
 

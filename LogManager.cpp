@@ -9,5 +9,15 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
-
 #include "LogManager.h"
+
+const Log *LogManager::filterByExtensions(const Log &_log) {
+    // TODO : Lister les extensions à filtrer
+    // TODO : Clonage du Log + Filtrage sur les extensions listés
+    return nullptr;
+}
+
+const Log *LogManager::filterByHour(const Log &_log, int hour) {
+    // TODO : Clonage du Log + Filtrage sur l'heure spécifiée
+    return nullptr;
+}

@@ -101,17 +101,6 @@ const Log *Controller::filterLog() {
     return finalLog;
 }
 
-const Log *Controller::filterByExtensions(const Log &_log) {
-    // TODO : Lister les extensions à filtrer
-    // TODO : Clonage du Log + Filtrage sur les extensions listés
-    return nullptr;
-}
-
-const Log *Controller::filterByHour(const Log &_log, int hour) {
-    // TODO : Clonage du Log + Filtrage sur l'heure spécifiée
-    return nullptr;
-}
-
 /**
  * Tri au préalable les associations entre un document et son nombre de hits par ordre décroissant du nombre
  * de hits. Ensuite, l'affichage se fait par lecture ordonnée des DocumentHits triés sur la sortie standard.
