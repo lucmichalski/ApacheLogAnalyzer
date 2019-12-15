@@ -55,6 +55,8 @@ protected:
 
     const Log *filterLog();
 
+    // TODO : les deux méthodes ci-dessous sont à déplacer dans la classe LogManager
+
     const Log *filterByExtensions(const Log &_log);
 
     const Log *filterByHour(const Log &_log, int hour);

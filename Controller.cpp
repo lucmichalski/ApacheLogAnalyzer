@@ -24,7 +24,9 @@ Controller::Controller(char **argv) {
         registerLogFile();
         const Log *_log = filterLog();
         if (applicationArguments->GetDotFileName().empty()) {
-            const vector<DocumentHits> *documentsHits = nullptr; // TODO : Create vector
+            // TODO : Création du tableau de documents hits
+            const vector<DocumentHits> *documentsHits = nullptr;
+            // TODO : Tri par ordre décroissant des hits du tableau
             showTopDocuments(*documentsHits, MAX_DOCUMENTS_SHOW);
             delete documentsHits;
         } else {
@@ -94,4 +96,5 @@ void Controller::showTopDocuments(const vector<DocumentHits> &documentsHits, int
 
 void Controller::generateDotFile(const Log *_log) const {
     // TODO : Générer le fichier .dot à partir du log spécifié
+    // Priorité : faible (spécifications à détailler)
 }
