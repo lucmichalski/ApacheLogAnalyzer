@@ -20,7 +20,7 @@ using namespace std;
  * @param argv La liste des arguments spécifiés
  * @return Un code indiquant le bon déroulement de l'exécution de l'application ou non
  */
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     Controller controller(argv);
     return EXIT_SUCCESS;
 }

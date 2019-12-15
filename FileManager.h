@@ -53,6 +53,7 @@ public:
      * Comportement par défaut.
      */
     ~FileManager() = default;
+
 protected:
     /**
      * Extrait les lignes du fichier de log à importer individuellement et les stock dans un ensemble non-ordonné.
@@ -61,14 +62,14 @@ protected:
      * @return Un ensemble non-ordonné de lignes du fichier de log importé
      * // TODO : Exception(s) levée(s) ?
      */
-    const unordered_set<const string * const> *extractLogLines(const ifstream &logFile) const;
+    const unordered_set<const string *const> *extractLogLines(const ifstream &logFile) const;
 
     /**
      * Détruit l'ensemble ainsi que les chaînes qu'il contient.
      *
      * @param logLines L'ensemble de lignes de log à détruire
      */
-    void deleteLogLines(const unordered_set<const string * const> *logLines) const;
+    void deleteLogLines(const unordered_set<const string *const> *logLines) const;
 };
 
 

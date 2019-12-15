@@ -38,7 +38,7 @@ void FileManager::CreateDotFile(const string &dotFileName, const Log &log) const
  * lus dans une chaîne de caractère elle même stockée dans un ensemble non-ordonné.
  * Une fois la lecture terminée, l'ensemble est retourné.
  */
-const unordered_set<const string * const> *FileManager::extractLogLines(const ifstream &logFile) const {
+const unordered_set<const string *const> *FileManager::extractLogLines(const ifstream &logFile) const {
     // TODO : Extraction des lignes de log du fichier à importer
     return nullptr;
 }
@@ -47,8 +47,8 @@ const unordered_set<const string * const> *FileManager::extractLogLines(const if
  * Détruit les ligne de log représentés par des chaînes de caractères puis supprime l'ensemble
  * non-ordonné.
  */
-void FileManager::deleteLogLines(const unordered_set<const string * const> *logLines) const {
-    for (const string * const logLine : *logLines) {
+void FileManager::deleteLogLines(const unordered_set<const string *const> *logLines) const {
+    for (const string *const logLine : *logLines) {
         delete logLine;
     }
     delete logLines;
