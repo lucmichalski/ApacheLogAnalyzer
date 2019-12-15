@@ -96,6 +96,8 @@ protected:
      */
     const Request *getRequest(const Document &srcDocument, const Document &destDocument, time_t date) const;
 
+    // TODO : Pointeur constant
+
     unordered_set<const Request *> *requests = nullptr;
     unordered_set<const Document *> *documents = nullptr;
 };
