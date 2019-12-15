@@ -47,10 +47,9 @@ const unordered_set<const string *const> *FileManager::extractLogLines(const ifs
  * Détruit les ligne de log représentés par des chaînes de caractères puis supprime l'ensemble
  * non-ordonné.
  */
-void FileManager::deleteLogLines(const unordered_set<const string *const> *logLines) const {
-//    for (const string *const logLine : *logLines) {
-//        delete logLine;
-//    }
-//    delete logLines;
-    // TODO : Fixer le problème de compilation
+void FileManager::deleteLogLines(const unordered_set<const string *> *logLines) const {
+    for (const string * logLine : *logLines) {
+        delete logLine;
+    }
+    delete logLines;
 }

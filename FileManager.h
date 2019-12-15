@@ -69,7 +69,7 @@ protected:
      *
      * @param logLines L'ensemble de lignes de log à détruire
      */
-    void deleteLogLines(const unordered_set<const string *const> *logLines) const;
+    void deleteLogLines(const unordered_set<const string *> *logLines) const;
 };
 
 
