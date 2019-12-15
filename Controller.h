@@ -51,8 +51,24 @@ protected:
      */
     void createApplicationArguments(char **argv);
 
+    /**
+     * Enregistre le fichier de log associé au nom du fichier spécifié dans les arguments d'exécution
+     * de l'application en important son contenu.
+     * @throws exception Si une exception durant le traitement du fichier est levée
+     */
     void registerLogFile();
 
+    /**
+     * Filtre le contenu du Log à partir d'une copie de ce dernier en fonction des arguments d'exécution
+     * de l'application.
+     * Deux types de filtrage sont possibles :
+     * - Filtrage par extensions : exclusion des documents (et requêtes associées) ayant comme
+     * extensions .css, .js et les extensions d'image (.jpg, .png et .gif)
+     * - Filtrage par créneau horaire : exclusion des requêtes
+     *
+     * @return Une éventuelle copie de l'instance de Log initiale si un filtrage a été effectué,
+     *  l'instance initiale sinon
+     */
     const Log *filterLog();
 
     // TODO : les deux méthodes ci-dessous sont à déplacer dans la classe LogManager
@@ -61,8 +77,19 @@ protected:
 
     const Log *filterByHour(const Log &_log, int hour);
 
-    void showTopDocuments(const vector<DocumentHits> &documentsHits, int max) const;
+    /**
+     * Affichage des n=max documents ayant le plus de hits par ordre décroissant.
+     *
+     * @param documentsHits Les associations entre un document et son nombre de hits.
+     * @param max Le nombre maximum de documents à afficher
+     */
+    void showTopDocuments(const vector<const DocumentHits *const> &documentsHits, int max) const;
 
+    /**
+     * Génération du fichier .dot à partir des informations du fichier de log importé.
+     *
+     * @param _log L'instance de la classe Log correspondant au fichier de log importé
+     */
     void generateDotFile(const Log *_log) const;
 
     LogManager *logManager = nullptr;
