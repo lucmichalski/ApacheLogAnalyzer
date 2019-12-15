@@ -16,7 +16,7 @@
  * et destination et de chaque requête avec les extensions passées en paramètre. La requête est retirée de
  * la copie de l'instance de la classe Log si l'une des extensions des documents correspond.
  */
-const Log *LogManager::FilterByExtensions(const Log &_log, const vector<const string> &extensions) const {
+const Log *LogManager::FilterByExtensions(const Log &_log, const vector<string> &extensions) const {
     // TODO : Clonage du Log + Filtrage sur les extensions listés
     return nullptr;
 }

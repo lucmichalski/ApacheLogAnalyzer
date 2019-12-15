@@ -48,8 +48,9 @@ const unordered_set<const string *const> *FileManager::extractLogLines(const ifs
  * non-ordonné.
  */
 void FileManager::deleteLogLines(const unordered_set<const string *const> *logLines) const {
-    for (const string *const logLine : *logLines) {
-        delete logLine;
-    }
-    delete logLines;
+//    for (const string *const logLine : *logLines) {
+//        delete logLine;
+//    }
+//    delete logLines;
+    // TODO : Fixer le problème de compilation
 }

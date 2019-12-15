@@ -85,12 +85,12 @@ const Log *Controller::filterLog() const {
     const Log *excludedExtensionsLog = nullptr;
     const Log *finalLog = nullptr;
     if (applicationArguments->IsExcludeExtensions()) {
-        vector<const string> extensions(5);
-        extensions.push_back(".css");
-        extensions.push_back(".js");
-        extensions.push_back(".png");
-        extensions.push_back(".jpg");
-        extensions.push_back(".gif");
+        vector<string> extensions(5);
+        extensions.emplace_back(".css");
+        extensions.emplace_back(".js");
+        extensions.emplace_back(".png");
+        extensions.emplace_back(".jpg");
+        extensions.emplace_back(".gif");
         excludedExtensionsLog = logManager->FilterByExtensions(*log, extensions);
     }
     if (applicationArguments->GetFilterHour() != -1) {

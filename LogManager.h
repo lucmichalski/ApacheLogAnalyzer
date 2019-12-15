@@ -28,7 +28,7 @@ public:
      * @param _log L'instance de la classe Log correspondant au fichier de log importé
      * @return La copie de l'instance de la classe Log spécifiée filtrée sur les extensions
      */
-    const Log *FilterByExtensions(const Log &_log, const vector<const string> &extensions) const;
+    const Log *FilterByExtensions(const Log &_log, const vector<string> &extensions) const;
 
     /**
      * Créer une copie de l'instance de la classe Log spécifiée puis applique un filtrage dessus
