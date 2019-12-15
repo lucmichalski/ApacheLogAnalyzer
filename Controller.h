@@ -32,7 +32,7 @@ public:
      * @param argv Liste des arguments saisies par l'utilisateur
      * @throws exception Suivant l'exception levée par les méthodes appelées
      */
-    Controller(char **argv);
+    explicit Controller(char **argv);
 
     /**
      * Destructeur du contrôleur.
@@ -77,7 +77,7 @@ protected:
      * @param documentsHits Les associations entre un document et son nombre de hits.
      * @param max Le nombre maximum de documents à afficher
      */
-    void showTopDocuments(const vector<const DocumentHits *const> &documentsHits, int max) const;
+    void showTopDocuments(const vector<const DocumentHits *> &documentsHits, int max) const;
 
     /**
      * Génération du fichier .dot à partir des informations du fichier de log importé.

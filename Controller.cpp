@@ -20,20 +20,21 @@ using namespace std;
  * au lancement de l'application.
  */
 Controller::Controller(char **argv) {
-    // TODO : Instanciation de LogManager et FileManager
+    fileManager = new FileManager();
+    logManager = new LogManager();
     try {
         createApplicationArguments(argv);
         registerLogFile();
-        const Log *_log = filterLog();
+        const Log *filteredLog = filterLog();
         if (applicationArguments->GetDotFileName().empty()) {
-            // TODO : Création du tableau de documents hits
-            const vector<const DocumentHits * const> *documentsHits = nullptr;
-            // TODO : Tri par ordre décroissant des hits du tableau
+            const vector<const DocumentHits *> *documentsHits = logManager->GetDocumentsHits(*filteredLog);
+            logManager->SortByHits(*documentsHits);
             showTopDocuments(*documentsHits, MAX_DOCUMENTS_SHOW);
-            delete documentsHits;
+            logManager->DeleteDocumentsHits(documentsHits);
         } else {
-            generateDotFile(log);
+            generateDotFile(filteredLog);
         }
+        delete filteredLog;
     } catch (const exception &e) {
         throw e;
     }
@@ -84,15 +85,21 @@ const Log *Controller::filterLog() const {
     const Log *excludedExtensionsLog = nullptr;
     const Log *finalLog = nullptr;
     if (applicationArguments->IsExcludeExtensions()) {
-        excludedExtensionsLog = filterByExtensions(*log);
+        vector<const string> extensions(5);
+        extensions.push_back(".css");
+        extensions.push_back(".js");
+        extensions.push_back(".png");
+        extensions.push_back(".jpg");
+        extensions.push_back(".gif");
+        excludedExtensionsLog = logManager->FilterByExtensions(*log, extensions);
     }
     if (applicationArguments->GetFilterHour() != -1) {
         if (excludedExtensionsLog) {
-            finalLog = filterByHour(*excludedExtensionsLog, applicationArguments->GetFilterHour());
+            finalLog = logManager->FilterByHour(*excludedExtensionsLog, applicationArguments->GetFilterHour());
+            delete excludedExtensionsLog;
         } else {
-            finalLog = filterByHour(*log, applicationArguments->GetFilterHour());
+            finalLog = logManager->FilterByHour(*log, applicationArguments->GetFilterHour());
         }
-        delete excludedExtensionsLog;
     } else if (excludedExtensionsLog) {
         finalLog = excludedExtensionsLog;
     } else {
@@ -105,7 +112,7 @@ const Log *Controller::filterLog() const {
  * Tri au préalable les associations entre un document et son nombre de hits par ordre décroissant du nombre
  * de hits. Ensuite, l'affichage se fait par lecture ordonnée des DocumentHits triés sur la sortie standard.
  */
-void Controller::showTopDocuments(const vector<const DocumentHits * const> &documentsHits, int max) const {
+void Controller::showTopDocuments(const vector<const DocumentHits *> &documentsHits, int max) const {
     // TODO : Affichage des n=max éléments dans l'ordre décroissant
     cerr << "Non implémenté" << endl;
 }
