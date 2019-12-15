@@ -20,9 +20,9 @@
  */
 class LogManager {
 public:
-    const Log *filterByExtensions(const Log &_log);
+    const Log *FilterByExtensions(const Log &_log);
 
-    const Log *filterByHour(const Log &_log, int hour);
+    const Log *FilterByHour(const Log &_log, int hour);
 protected:
 };
 
