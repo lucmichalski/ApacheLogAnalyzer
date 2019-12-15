@@ -69,7 +69,7 @@ protected:
      * @return Une éventuelle copie de l'instance de Log initiale si un filtrage a été effectué,
      *  l'instance initiale sinon
      */
-    const Log *filterLog();
+    const Log *filterLog() const;
 
     /**
      * Affichage des n=max documents ayant le plus de hits par ordre décroissant.

@@ -80,7 +80,7 @@ void Controller::registerLogFile() {
  * une copie de la classe Log sera retournée, sinon l'instance de la classe Log du contrôleur
  * sera retournée.
  */
-const Log *Controller::filterLog() {
+const Log *Controller::filterLog() const {
     const Log *excludedExtensionsLog = nullptr;
     const Log *finalLog = nullptr;
     if (applicationArguments->IsExcludeExtensions()) {
