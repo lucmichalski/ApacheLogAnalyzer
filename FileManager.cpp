@@ -21,15 +21,19 @@ Log *FileManager::ImportLogFile(const string &fileName) const {
 	ifstream read(fileName.c_str());
 	if (read) {
 		us = extractLogLines(read);
-		/*unordered_set<const string*>::const_iterator itr;
+		//Ci-dessous le code pour parcourir us
+		unordered_set<const string*>::const_iterator itr;
 		for(itr = us->begin();itr != us->end(); ++itr)
 		{
-			cout << "log : " << (**itr) << ' ';
+			//cout << "log : " << (**itr) << ' ';
 		}
-		cout << endl;*/
+		cout << endl;
 	} else {
 		cerr << "Erreur d'ouverture du fichier." << endl;
 	}
+	read.close();
+	Log *test = new Log();
+	test = LogFactory->CreateLog(us);
 	return nullptr;
 }
 

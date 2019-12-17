@@ -13,6 +13,7 @@
 #define APACHELOGANALYZER_FILEMANAGER_H
 
 #include "Log.h"
+#include "LogFactory.h"
 
 /**
  * FileManager met à disposition un ensemble de services permettant de gérer tout l'aspect
