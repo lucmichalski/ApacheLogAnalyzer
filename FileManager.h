@@ -62,7 +62,7 @@ protected:
 	 * @return Un ensemble non-ordonné de lignes du fichier de log importé
 	 * // TODO : Exception(s) levée(s) ?
 	 */
-	const unordered_set<const string *const> *extractLogLines( ifstream &logFile) const;
+	const unordered_set<const string *> *extractLogLines( ifstream &logFile) const;
 
 	/**
 	 * Détruit l'ensemble ainsi que les chaînes qu'il contient.
