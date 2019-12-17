@@ -1,13 +1,13 @@
 /*************************************************************************
-                    Controller - Contrôleur de l'application
+					Controller - Contrôleur de l'application
 							 -------------------
 	début                : 11/12/2019
 	copyright            : (C) 2019 par :
-                            - Milène DAUGAN
-                            - Loïc DUBOIS-TERMOZ
+							- Milène DAUGAN
+							- Loïc DUBOIS-TERMOZ
 	e-mail               :
-                            - milene.daugan@insa-lyon.fr
-                            - loic.dubois-termoz@insa-lyon.fr
+							- milene.daugan@insa-lyon.fr
+							- loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
 #include "Controller.h"
 #include <iostream>
@@ -19,35 +19,38 @@ using namespace std;
  * Exécute différentes instructions du programme suivant les arguments spécifiés par l'utilisateur
  * au lancement de l'application.
  */
-Controller::Controller(char **argv) {
-    fileManager = new FileManager();
-    logManager = new LogManager();
-    try {
-        createApplicationArguments(argv);
-        registerLogFile();
-        const Log *filteredLog = filterLog();
-        if (applicationArguments->GetDotFileName().empty()) {
-            const vector<const DocumentHits *> *documentsHits = logManager->GetDocumentsHits(*filteredLog);
-            logManager->SortByHits(*documentsHits);
-            showTopDocuments(*documentsHits, MAX_DOCUMENTS_SHOW);
-            logManager->DeleteDocumentsHits(documentsHits);
-        } else {
-            generateDotFile(filteredLog);
-        }
-        delete filteredLog;
-    } catch (const exception &e) {
-        throw e;
-    }
+Controller::Controller(int argc,char **argv) {
+	fileManager = new FileManager();
+	logManager = new LogManager();
+	try {
+		createApplicationArguments(argc,argv);
+		registerLogFile();
+		const Log *filteredLog = filterLog();//ERREUR ICI
+		cout << "HERE" << endl;
+		if (applicationArguments->GetDotFileName().empty()) {
+			const vector<const DocumentHits *> *documentsHits = logManager->GetDocumentsHits(*filteredLog);
+			logManager->SortByHits(*documentsHits);
+			showTopDocuments(*documentsHits, MAX_DOCUMENTS_SHOW);
+			logManager->DeleteDocumentsHits(documentsHits);
+		} else {
+			generateDotFile(filteredLog);
+		}
+		delete filteredLog;
+	} catch (const exception &e) {
+		cout << "Controller.cpp ligne 40" << endl;
+		cout << "Penser à bien inclure le nom du fichier de log dans la commande !" << endl;
+		throw e;
+	}
 }
 
 /**
  * Supprime tous les attributs de la classe (LogManager, FileManager, ApplicationArguments et Log).
  */
 Controller::~Controller() {
-    delete logManager;
-    delete fileManager;
-    delete applicationArguments;
-    delete log;
+	delete logManager;
+	delete fileManager;
+	delete applicationArguments;
+	delete log;
 }
 
 /**
@@ -60,9 +63,25 @@ Controller::~Controller() {
  * La création de l'instance de la classe ApplicationArguments est couplée avec la vérification. Ainsi, si la
  * vérification échoue, l'instanciation de la classe échoue également.
  */
-void Controller::createApplicationArguments(char **argv) {
-    // TODO : Vérification de la validité de la commande (levée d'exception si pertinent)
-    // TODO : Instanciation de la classe ApplicationArguments (si commande valide)
+void Controller::createApplicationArguments(int argc,char **argv) {
+	// TODO : Vérification de la validité de la commande (levée d'exception si pertinent)
+	string testExtensionLogFile = argv[1];
+
+	//instanciation sans options
+	if(argc == 2 && testExtensionLogFile.find(".log") != string::npos)
+	{
+		string _logFileName = argv[1];
+		bool _excludeExtensions = false;
+		int _filterHour = -1;
+		string _dotFileName = "";
+		
+		applicationArguments = new ApplicationArguments(_logFileName, _excludeExtensions, _filterHour, _dotFileName);
+		// TODO : Instanciation de la classe ApplicationArguments (si commande valide)
+	}
+	else
+	{
+		cout << "Commande Erronée" << endl;
+	}
 }
 
 /**
@@ -71,8 +90,10 @@ void Controller::createApplicationArguments(char **argv) {
  * sera stockée dans le contrôleur de l'application.
  */
 void Controller::registerLogFile() {
-    // TODO : Importation du fichier de log en unordened_set<string>
-    // TODO : Instanciation de la classe Log
+	// TODO : Importation du fichier de log en unordened_set<string>
+	// TODO : Instanciation de la classe Log
+	const string _logFileName = applicationArguments->GetLogFileName();
+	fileManager->ImportLogFile(_logFileName);
 }
 
 /**
@@ -82,30 +103,38 @@ void Controller::registerLogFile() {
  * sera retournée.
  */
 const Log *Controller::filterLog() const {
-    const Log *excludedExtensionsLog = nullptr;
-    const Log *finalLog = nullptr;
-    if (applicationArguments->IsExcludeExtensions()) {
-        vector<string> extensions(5);
-        extensions.emplace_back(".css");
-        extensions.emplace_back(".js");
-        extensions.emplace_back(".png");
-        extensions.emplace_back(".jpg");
-        extensions.emplace_back(".gif");
-        excludedExtensionsLog = logManager->FilterByExtensions(*log, extensions);
-    }
-    if (applicationArguments->GetFilterHour() != -1) {
-        if (excludedExtensionsLog) {
-            finalLog = logManager->FilterByHour(*excludedExtensionsLog, applicationArguments->GetFilterHour());
-            delete excludedExtensionsLog;
-        } else {
-            finalLog = logManager->FilterByHour(*log, applicationArguments->GetFilterHour());
-        }
-    } else if (excludedExtensionsLog) {
-        finalLog = excludedExtensionsLog;
-    } else {
-        finalLog = log;
-    }
-    return finalLog;
+	const Log *excludedExtensionsLog = nullptr;
+	cout << applicationArguments->IsExcludeExtensions() << endl;
+	const Log *finalLog = nullptr;
+	cout << "HERE2" << endl;
+
+	cout << applicationArguments->IsExcludeExtensions() << endl;
+	if (applicationArguments->IsExcludeExtensions()) {
+		cout << "HERE3" << " " << applicationArguments->IsExcludeExtensions() << endl;
+		vector<string> extensions(5);
+		extensions.emplace_back(".css");
+		extensions.emplace_back(".js");
+		extensions.emplace_back(".png");
+		extensions.emplace_back(".jpg");
+		extensions.emplace_back(".gif");
+		excludedExtensionsLog = logManager->FilterByExtensions(*log, extensions);
+	}
+	if (applicationArguments->GetFilterHour() != -1) {
+		cout << "HERE4" << endl;
+		if (excludedExtensionsLog) {
+			finalLog = logManager->FilterByHour(*excludedExtensionsLog, applicationArguments->GetFilterHour());
+			delete excludedExtensionsLog;
+		} else {
+			finalLog = logManager->FilterByHour(*log, applicationArguments->GetFilterHour());
+		}
+	} else if (excludedExtensionsLog) {
+		cout << "HERE5" << endl;
+		finalLog = excludedExtensionsLog;
+	} else {
+		cout << "HERE6" << endl;
+		finalLog = log;
+	}
+	return finalLog;
 }
 
 /**
@@ -113,14 +142,14 @@ const Log *Controller::filterLog() const {
  * de hits. Ensuite, l'affichage se fait par lecture ordonnée des DocumentHits triés sur la sortie standard.
  */
 void Controller::showTopDocuments(const vector<const DocumentHits *> &documentsHits, int max) const {
-    // TODO : Affichage des n=max éléments dans l'ordre décroissant
-    cerr << "Non implémenté" << endl;
+	// TODO : Affichage des n=max éléments dans l'ordre décroissant
+	cerr << "Non implémenté" << endl;
 }
 
 /**
  * // TODO : Spécifications à détailler
  */
 void Controller::generateDotFile(const Log *_log) const {
-    // TODO : Générer le fichier .dot à partir du log spécifié
-    // Priorité : faible (spécifications à détailler)
+	// TODO : Générer le fichier .dot à partir du log spécifié
+	// Priorité : faible (spécifications à détailler)
 }

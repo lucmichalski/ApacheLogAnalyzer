@@ -3,11 +3,11 @@
 							 -------------------
 	début                : 11/12/2019
 	copyright            : (C) 2019 par :
-                            - Milène DAUGAN
-                            - Loïc DUBOIS-TERMOZ
+							- Milène DAUGAN
+							- Loïc DUBOIS-TERMOZ
 	e-mail               :
-                            - milene.daugan@insa-lyon.fr
-                            - loic.dubois-termoz@insa-lyon.fr
+							- milene.daugan@insa-lyon.fr
+							- loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
 #include "FileManager.h"
 
@@ -16,8 +16,18 @@
  * en fermant au préalable le fichier ouvert.
  */
 Log *FileManager::ImportLogFile(const string &fileName) const {
-    // TODO : Import du fichier de log sous la forme d'une instance de la classe Log
-    return nullptr;
+	// TODO : Import du fichier de log sous la forme d'une instance de la classe Log
+	//unordered_set<const string *const> *us = new unordered_set<const string *const>;
+	ifstream read(fileName.c_str());
+	if(read)
+	{
+		//us = extractLogLines(read);
+	}
+	else
+	{
+		cerr << "Erreur d'ouverture du fichier." << endl;
+	}
+	return nullptr;
 }
 
 /**
@@ -29,18 +39,29 @@ Log *FileManager::ImportLogFile(const string &fileName) const {
  * Et enfin ferme le fichier.
  */
 void FileManager::CreateDotFile(const string &dotFileName, const Log &log) const {
-    // TODO : Création du fichier .dot en fonction de l'instance de la classe Log spécifiée
-    // SPECIFICATIONS A PRECISER !!! concernant la déléguation du traitement du Log pour le fichier .dot
+	// TODO : Création du fichier .dot en fonction de l'instance de la classe Log spécifiée
+	// SPECIFICATIONS A PRECISER !!! concernant la déléguation du traitement du Log pour le fichier .dot
 }
 
 /**
- * Ligne le fichier et s'arrête à chaque caractère de fin de ligne pour stocker l'ensemble des caractères
+ * Lit le fichier et s'arrête à chaque caractère de fin de ligne pour stocker l'ensemble des caractères
  * lus dans une chaîne de caractère elle même stockée dans un ensemble non-ordonné.
  * Une fois la lecture terminée, l'ensemble est retourné.
  */
-const unordered_set<const string *const> *FileManager::extractLogLines(const ifstream &logFile) const {
-    // TODO : Extraction des lignes de log du fichier à importer
-    return nullptr;
+const unordered_set<const string *const> *FileManager::extractLogLines( ifstream &logFile) const {
+	// TODO : Extraction des lignes de log du fichier à importer
+	//unordered_set<const string *const> *us = new unordered_set<const string *const>;
+	unordered_set<const string *const> *us = new unordered_set<const string *const>;
+	string *line = new string();
+	//getline(logFile, *line);
+	
+	while(getline(logFile, *line))
+	{
+			//const string *const str = new string(*line);
+			//us->insert(line);
+	}
+
+	return nullptr;//us;
 }
 
 /**
@@ -48,8 +69,8 @@ const unordered_set<const string *const> *FileManager::extractLogLines(const ifs
  * non-ordonné.
  */
 void FileManager::deleteLogLines(const unordered_set<const string *> *logLines) const {
-    for (const string * logLine : *logLines) {
-        delete logLine;
-    }
-    delete logLines;
+	for (const string * logLine : *logLines) {
+		delete logLine;
+	}
+	delete logLines;
 }
