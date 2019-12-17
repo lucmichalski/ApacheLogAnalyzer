@@ -33,7 +33,8 @@ Log *FileManager::ImportLogFile(const string &fileName) const {
 	}
 	read.close();
 	Log *test = new Log();
-	test = LogFactory->CreateLog(us);
+	LogFactory logFactory;
+	test = logFactory.CreateLog(us);
 	return nullptr;
 }
 

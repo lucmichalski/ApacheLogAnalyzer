@@ -16,7 +16,7 @@
  * l'instance de la classe Log en créant également des instances de Request
  * et Document.
  */
-Log *LogFactory::CreateLog(unordered_set<string *> *logLines) const {
+Log *LogFactory::CreateLog(unordered_set<const string *> *logLines) const {
     Log *log = new Log();
     for (const string *logLine : *logLines) {
         const RequestData requestData = analyzeLogLine(*logLine);
