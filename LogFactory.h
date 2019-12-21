@@ -28,7 +28,7 @@ public:
      * @param logLines Les lignes du fichier de log importé
      * @return Le Log créée
      */
-    Log *CreateLog(unordered_set<const string *> *logLines) const;
+    Log *CreateLog(unordered_set<string *> *logLines) const;
 
 protected:
     /**

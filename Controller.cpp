@@ -25,10 +25,12 @@ Controller::Controller(int argc,char **argv) {
 	try {
 		createApplicationArguments(argc,argv);
 		registerLogFile();
-		const Log *filteredLog = filterLog();//ERREUR ICI
-		cout << "HERE" << endl;
+		const Log *filteredLog = filterLog();
 		if (applicationArguments->GetDotFileName().empty()) {
 			const vector<const DocumentHits *> *documentsHits = logManager->GetDocumentsHits(*filteredLog);
+
+			cout << "docHits :" << logManager->GetDocumentsHits(*filteredLog)<<endl;
+
 			logManager->SortByHits(*documentsHits);
 			showTopDocuments(*documentsHits, MAX_DOCUMENTS_SHOW);
 			logManager->DeleteDocumentsHits(documentsHits);
@@ -37,9 +39,7 @@ Controller::Controller(int argc,char **argv) {
 		}
 		delete filteredLog;
 	} catch (const exception &e) {
-		cout << "Controller.cpp ligne 40" << endl;
-		cout << "Penser à bien inclure le nom du fichier de log dans la commande !" << endl;
-		throw e;
+			throw e;
 	}
 }
 
@@ -93,7 +93,7 @@ void Controller::registerLogFile() {
 	// TODO : Importation du fichier de log en unordened_set<string>
 	// TODO : Instanciation de la classe Log
 	const string _logFileName = applicationArguments->GetLogFileName();
-	fileManager->ImportLogFile(_logFileName);
+	log = fileManager->ImportLogFile(_logFileName);
 }
 
 /**
@@ -104,13 +104,8 @@ void Controller::registerLogFile() {
  */
 const Log *Controller::filterLog() const {
 	const Log *excludedExtensionsLog = nullptr;
-	cout << applicationArguments->IsExcludeExtensions() << endl;
 	const Log *finalLog = nullptr;
-	cout << "HERE2" << endl;
-
-	cout << applicationArguments->IsExcludeExtensions() << endl;
 	if (applicationArguments->IsExcludeExtensions()) {
-		cout << "HERE3" << " " << applicationArguments->IsExcludeExtensions() << endl;
 		vector<string> extensions(5);
 		extensions.emplace_back(".css");
 		extensions.emplace_back(".js");
@@ -120,7 +115,6 @@ const Log *Controller::filterLog() const {
 		excludedExtensionsLog = logManager->FilterByExtensions(*log, extensions);
 	}
 	if (applicationArguments->GetFilterHour() != -1) {
-		cout << "HERE4" << endl;
 		if (excludedExtensionsLog) {
 			finalLog = logManager->FilterByHour(*excludedExtensionsLog, applicationArguments->GetFilterHour());
 			delete excludedExtensionsLog;
@@ -128,10 +122,8 @@ const Log *Controller::filterLog() const {
 			finalLog = logManager->FilterByHour(*log, applicationArguments->GetFilterHour());
 		}
 	} else if (excludedExtensionsLog) {
-		cout << "HERE5" << endl;
 		finalLog = excludedExtensionsLog;
 	} else {
-		cout << "HERE6" << endl;
 		finalLog = log;
 	}
 	return finalLog;
@@ -143,6 +135,9 @@ const Log *Controller::filterLog() const {
  */
 void Controller::showTopDocuments(const vector<const DocumentHits *> &documentsHits, int max) const {
 	// TODO : Affichage des n=max éléments dans l'ordre décroissant
+	//faire logmanager
+
+	cout << endl;
 	cerr << "Non implémenté" << endl;
 }
 

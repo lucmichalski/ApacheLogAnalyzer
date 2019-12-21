@@ -17,25 +17,17 @@
  */
 Log *FileManager::ImportLogFile(const string &fileName) const {
 	// TODO : Import du fichier de log sous la forme d'une instance de la classe Log
-	unordered_set<const string *> *us = new unordered_set<const string *>;
+	unordered_set<string *> *logLines = new unordered_set<string *>;
 	ifstream read(fileName.c_str());
 	if (read) {
-		us = extractLogLines(read);
-		//Ci-dessous le code pour parcourir us
-		unordered_set<const string*>::const_iterator itr;
-		for(itr = us->begin();itr != us->end(); ++itr)
-		{
-			//cout << "log : " << (**itr) << ' ';
-		}
-		cout << endl;
+		logLines = extractLogLines(read);
 	} else {
 		cerr << "Erreur d'ouverture du fichier." << endl;
 	}
 	read.close();
-	Log *test = new Log();
 	LogFactory logFactory;
-	test = logFactory.CreateLog(us);
-	return nullptr;
+	Log *log = logFactory.CreateLog(logLines);
+	return log;
 }
 
 /**
@@ -56,18 +48,18 @@ void FileManager::CreateDotFile(const string &dotFileName, const Log &log) const
  * lus dans une chaîne de caractère elle même stockée dans un ensemble non-ordonné.
  * Une fois la lecture terminée, l'ensemble est retourné.
  */
-unordered_set<const string *> *FileManager::extractLogLines(ifstream &logFile) const {
+unordered_set<string *> *FileManager::extractLogLines(ifstream &logFile) const {
 	// TODO : Extraction des lignes de log du fichier à importer
-	unordered_set<const string *> *us = new unordered_set<const string *>;
+	unordered_set<string *> *logLines = new unordered_set<string *>;
 
 	string *line = new string();
 
 	while (getline(logFile, *line)) {
 		string * str = new string(*line);
-		us->insert(str);//écrase les lines et ne garde que la dernière
+		logLines->insert(str);//écrase les lines et ne garde que la dernière
 	}
 
-	return us;
+	return logLines;
 }
 
 /**

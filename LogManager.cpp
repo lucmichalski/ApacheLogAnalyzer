@@ -1,13 +1,13 @@
 /*************************************************************************
-            LogManager - Service sur le traitement d'un log
+			LogManager - Service sur le traitement d'un log
 							 -------------------
 	début                : 11/12/2019
 	copyright            : (C) 2019 par :
-                            - Milène DAUGAN
-                            - Loïc DUBOIS-TERMOZ
+							- Milène DAUGAN
+							- Loïc DUBOIS-TERMOZ
 	e-mail               :
-                            - milene.daugan@insa-lyon.fr
-                            - loic.dubois-termoz@insa-lyon.fr
+							- milene.daugan@insa-lyon.fr
+							- loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
 #include "LogManager.h"
 
@@ -17,8 +17,8 @@
  * la copie de l'instance de la classe Log si l'une des extensions des documents correspond.
  */
 const Log *LogManager::FilterByExtensions(const Log &_log, const vector<string> &extensions) const {
-    // TODO : Clonage du Log + Filtrage sur les extensions listés
-    return nullptr;
+	// TODO : Clonage du Log + Filtrage sur les extensions listés
+	return nullptr;
 }
 
 /**
@@ -28,8 +28,8 @@ const Log *LogManager::FilterByExtensions(const Log &_log, const vector<string> 
  * la requête est retirée de la copie de l'instance de la classe Log.
  */
 const Log *LogManager::FilterByHour(const Log &_log, int hour) const {
-    // TODO : Clonage du Log + Filtrage sur l'heure spécifiée
-    return nullptr;
+	// TODO : Clonage du Log + Filtrage sur l'heure spécifiée
+	return nullptr;
 }
 
 /**
@@ -37,15 +37,21 @@ const Log *LogManager::FilterByHour(const Log &_log, int hour) const {
  * le remplit d'associations entre un document et son nombre de hits via les requêtes enregistrées.
  */
 const vector<const DocumentHits *> *LogManager::GetDocumentsHits(const Log &log) const {
-    // TODO : Construire un vecteur de taille le nombre de documents du Log puis le remplir
-    return nullptr;
+	// TODO : Construire un vecteur de taille le nombre de documents du Log puis le remplir
+	//unordered_set<const DocumentHits *> *documentHits = new unordered_set<const DocumentHits *>(log.size());
+	//documentHits.insert();
+	
+	//DocumentHits(const Document &_document, int _nbHits)
+	
+	
+	return nullptr;
 }
 
 /**
  * Détruit l'ensemble des instances de la classe DocumentHits avant de détuire le vecteur.
  */
 void LogManager::DeleteDocumentsHits(const vector<const DocumentHits *> *documentsHits) const {
-    // TODO : Destruction du vecteur ainsi que les DocumentHits contenus
+	// TODO : Destruction du vecteur ainsi que les DocumentHits contenus
 }
 
 /**
@@ -55,14 +61,14 @@ void LogManager::DeleteDocumentsHits(const vector<const DocumentHits *> *documen
  * Une fois le traitement terminé, le vecteur est retourné.
  */
 const vector<const DocumentHits *> *LogManager::SortByHits(const vector<const DocumentHits *> &documentsHits) const {
-    // TODO : Tri du vecteur par ordre décroissant du nombre de hits (se baser sur la STL si possible)
-    return nullptr;
+	// TODO : Tri du vecteur par ordre décroissant du nombre de hits (se baser sur la STL si possible)
+	return nullptr;
 }
 
 /**
  * // TODO : Spécifications à détailler !
  */
 int LogManager::CountTimelessRequestsEquals(const Log &log, const Request &request) const {
-    // TODO : Déterminer la pondération de la requête à partir de l'instance de la classe Log spécifiée
-    return 0;
+	// TODO : Déterminer la pondération de la requête à partir de l'instance de la classe Log spécifiée
+	return 0;
 }
