@@ -17,8 +17,8 @@
  * la copie de l'instance de la classe Log si l'une des extensions des documents correspond.
  */
 const Log *LogManager::FilterByExtensions(const Log &_log, const vector<string> &extensions) const {
-	// TODO : Clonage du Log + Filtrage sur les extensions listés
-	return nullptr;
+    // TODO : Clonage du Log + Filtrage sur les extensions listés
+    return nullptr;
 }
 
 /**
@@ -28,8 +28,8 @@ const Log *LogManager::FilterByExtensions(const Log &_log, const vector<string> 
  * la requête est retirée de la copie de l'instance de la classe Log.
  */
 const Log *LogManager::FilterByHour(const Log &_log, int hour) const {
-	// TODO : Clonage du Log + Filtrage sur l'heure spécifiée
-	return nullptr;
+    // TODO : Clonage du Log + Filtrage sur l'heure spécifiée
+    return nullptr;
 }
 
 /**
@@ -37,21 +37,26 @@ const Log *LogManager::FilterByHour(const Log &_log, int hour) const {
  * le remplit d'associations entre un document et son nombre de hits via les requêtes enregistrées.
  */
 const vector<const DocumentHits *> *LogManager::GetDocumentsHits(const Log &log) const {
-	// TODO : Construire un vecteur de taille le nombre de documents du Log puis le remplir
-	//unordered_set<const DocumentHits *> *documentHits = new unordered_set<const DocumentHits *>(log.size());
-	//documentHits.insert();
-	
-	//DocumentHits(const Document &_document, int _nbHits)
-	
-	
-	return nullptr;
+    // TODO : Construire un vecteur de taille le nombre de documents du Log puis le remplir
+    vector<const DocumentHits *> *documentsHits = new vector<const DocumentHits *>(log.GetDocuments()->size());
+
+    for (const Document *const document : *log.GetDocuments()) {
+        int nbHits = 0;
+        for (const Request *const request : *log.GetRequests()) {
+            if (request->GetDestDocument() == *document) {
+                ++nbHits;
+            }
+        }
+        documentsHits->push_back(new DocumentHits(*document, nbHits));
+    }
+    return documentsHits;
 }
 
 /**
  * Détruit l'ensemble des instances de la classe DocumentHits avant de détuire le vecteur.
  */
 void LogManager::DeleteDocumentsHits(const vector<const DocumentHits *> *documentsHits) const {
-	// TODO : Destruction du vecteur ainsi que les DocumentHits contenus
+    // TODO : Destruction du vecteur ainsi que les DocumentHits contenus
 }
 
 /**
@@ -61,14 +66,14 @@ void LogManager::DeleteDocumentsHits(const vector<const DocumentHits *> *documen
  * Une fois le traitement terminé, le vecteur est retourné.
  */
 const vector<const DocumentHits *> *LogManager::SortByHits(const vector<const DocumentHits *> &documentsHits) const {
-	// TODO : Tri du vecteur par ordre décroissant du nombre de hits (se baser sur la STL si possible)
-	return nullptr;
+    // TODO : Tri du vecteur par ordre décroissant du nombre de hits (se baser sur la STL si possible)
+    return nullptr;
 }
 
 /**
  * // TODO : Spécifications à détailler !
  */
 int LogManager::CountTimelessRequestsEquals(const Log &log, const Request &request) const {
-	// TODO : Déterminer la pondération de la requête à partir de l'instance de la classe Log spécifiée
-	return 0;
+    // TODO : Déterminer la pondération de la requête à partir de l'instance de la classe Log spécifiée
+    return 0;
 }
