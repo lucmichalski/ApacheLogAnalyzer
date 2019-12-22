@@ -12,6 +12,8 @@
 #include "FileManager.h"
 //#include <fstream>
 
+using namespace std;
+
 /**
  * Ouvre le fichier en lecture et stock chaque ligne lue dans un ensemble non-ordonné puis le retourne
  * en fermant au préalable le fichier ouvert.

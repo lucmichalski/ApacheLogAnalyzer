@@ -22,13 +22,21 @@
 class LogFactory {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend std::ostream &operator<<(std::ostream &os, const LogFactory &logFactory);
+
+    /**
      * Créer un Log ainsi que les Request et Document associés et le retourne ensuite.
      * La suppression du log est à la charge de l'appelant.
      *
      * @param logLines Les lignes du fichier de log importé
      * @return Le Log créée
      */
-    Log *CreateLog(unordered_set<string *> *logLines) const;
+    Log *CreateLog(std::unordered_set<std::string *> *logLines) const;
 
 protected:
     /**
@@ -37,7 +45,12 @@ protected:
      * @param logLine La ligne de log à analyser
      * @return Le request data correspondant aux données de la ligne de log
      */
-    const RequestData analyzeLogLine(const string &logLine) const;
+    const RequestData analyzeLogLine(const std::string &logLine) const;
 };
+
+inline std::ostream &operator<<(std::ostream &os, const LogFactory &logFactory) {
+    os << "LogFactory{}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_LOGFACTORY_H

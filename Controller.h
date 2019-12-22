@@ -27,6 +27,14 @@ const int MAX_DOCUMENTS_SHOW = 10;
 class Controller {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend std::ostream &operator<<(std::ostream &os, const Controller &controller);
+
+    /**
      * Constructeur du contrôleur de l'application.
      *
      * @param argv Liste des arguments saisies par l'utilisateur
@@ -78,7 +86,7 @@ protected:
      * @param documentsHits Les associations entre un document et son nombre de hits.
      * @param max Le nombre maximum de documents à afficher
      */
-    void showTopDocuments(const vector<const DocumentHits *> &documentsHits, int max) const;
+    void showTopDocuments(const std::vector<const DocumentHits *> &documentsHits, int max) const;
 
     /**
      * Génération du fichier .dot à partir des informations du fichier de log importé.
@@ -92,5 +100,14 @@ protected:
     ApplicationArguments *applicationArguments = nullptr;
     Log *log = nullptr;
 };
+
+inline std::ostream &operator<<(std::ostream &os, const Controller &controller) {
+  os << "Controller{logManager=" << controller.logManager
+     << ", fileManager=" << controller.fileManager
+     << ", applicationArguments=" << controller.applicationArguments
+     << ", log=" << controller.log
+     << "}";
+  return os;
+}
 
 #endif //APACHELOGANALYZER_CONTROLLER_H

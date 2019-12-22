@@ -21,8 +21,8 @@ using namespace std;
  * @return Un code indiquant le bon déroulement de l'exécution de l'application ou non
  */
 int main(int argc, char **argv) {
-		Controller controller(argc,argv);
-		return EXIT_SUCCESS;
+    Controller controller(argc, argv);
+    return EXIT_SUCCESS;
 }
 /*
 Pour tester (Milène)

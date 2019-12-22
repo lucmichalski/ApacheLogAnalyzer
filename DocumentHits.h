@@ -12,6 +12,7 @@
 #ifndef APACHELOGANALYZER_DOCUMENTHITS_H
 #define APACHELOGANALYZER_DOCUMENTHITS_H
 
+#include <sstream>
 #include "Document.h"
 
 /**
@@ -19,6 +20,14 @@
  */
 class DocumentHits {
 public:
+    /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend std::ostream &operator<<(std::ostream &os, const DocumentHits &documentHits);
+
 	/**
 	 * @return La référence constante au document associé au nombre de hits
 	 */
@@ -60,5 +69,10 @@ protected:
 	const Document &document;
 	int nbHits = 0;
 };
+
+inline std::ostream &operator<<(std::ostream &os, const DocumentHits &documentHits) {
+    os << "DocumentHits{document=" << documentHits.document << ", nbHits=" << documentHits.nbHits << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_DOCUMENTHITS_H

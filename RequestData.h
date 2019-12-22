@@ -17,8 +17,6 @@
 #include "RequestVisitor.h"
 #include "HTTPRequestData.h"
 
-using namespace std;
-
 /**
  * RequestData contient l'ensemble des données de la requête associée (adresse IP, date, document ciblé,
  * navigateur utilisé, ...).
@@ -29,9 +27,17 @@ class RequestData {
     // TODO : rendre les mutateurs privés mais friend avec la méthode créant le RequestData
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend std::ostream &operator<<(std::ostream &os, const RequestData &requestData);
+
+    /**
      * @return L'adresse IPv4 du client de la requête HTTP
      */
-    const string &GetClientAddress() const {
+    const std::string &GetClientAddress() const {
         return clientAddress;
     }
 
@@ -40,7 +46,7 @@ public:
      *
      * @param _clientAddress L'adresse IPv4 du client de la requête HTTP
      */
-    void SetClientAddress(string _clientAddress) {
+    void SetClientAddress(std::string _clientAddress) {
         clientAddress = move(_clientAddress);
     }
 
@@ -95,7 +101,7 @@ public:
     /**
      * @return L'URL du Referer de la requête HTTP
      */
-    const string &GetRefererUrl() const {
+    const std::string &GetRefererUrl() const {
         return refererURL;
     }
 
@@ -104,14 +110,14 @@ public:
      *
      * @param _refererUrl L'URL du Referer de la requête HTTP
      */
-    void SetRefererUrl(string _refererUrl) {
+    void SetRefererUrl(std::string _refererUrl) {
         refererURL = move(_refererUrl);
     }
 
     /**
      * @return Identifiants du navigateur utilisé lors de l'exécution de la requête
      */
-    const string &GetBrowserId() const {
+    const std::string &GetBrowserId() const {
         return browserId;
     }
 
@@ -120,7 +126,7 @@ public:
      *
      * @param _browserId Les identifiants du navigateur utilisé lors de l'exécution de la requête
      */
-    void SetBrowserId(string _browserId) {
+    void SetBrowserId(std::string _browserId) {
         browserId = move(_browserId);
     }
 
@@ -177,14 +183,27 @@ public:
     virtual ~RequestData() = default;
 
 protected:
-    string clientAddress;
+    std::string clientAddress;
     time_t date = 0;
     int returnCode = 0;
     int answerSize = 0;
-    string refererURL;
-    string browserId;
+    std::string refererURL;
+    std::string browserId;
     RequestVisitor requestVisitor;
     HTTPRequestData httpRequestData;
 };
+
+inline std::ostream &operator<<(std::ostream &os, const RequestData &requestData) {
+    os << "RequestData{clientAddress=" << requestData.clientAddress
+       << ", date=" << requestData.date
+       << ", returnCode=" << requestData.returnCode
+       << ", answerSize=" << requestData.answerSize
+       << ", refererURL=" << requestData.refererURL
+       << ", browserId=" << requestData.browserId
+       << ", requestVisitor=" << requestData.requestVisitor
+       << ", httpRequestData=" << requestData.httpRequestData
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_REQUESTDATA_H

@@ -13,8 +13,7 @@
 #define APACHELOGANALYZER_REQUESTVISITOR_H
 
 #include <string>
-
-using namespace std;
+#include <iostream>
 
 /**
  * Le rôle de la classe RequestVisitor est en lien avec celui de la classe RequestData
@@ -22,16 +21,24 @@ using namespace std;
 class RequestVisitor {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend std::ostream &operator<<(std::ostream &os, const RequestVisitor &requestVisitor);
+
+    /**
      * @return Le nom d'utilisateur spécifique aux logs
      */
-    const string &GetUserLogName() const {
+    const std::string &GetUserLogName() const {
         return userLogName;
     }
 
     /**
      * @return Le nom d'utilisateur d'origine
       */
-    const string &GetUserName() const {
+    const std::string &GetUserName() const {
         return userName;
     }
 
@@ -47,8 +54,8 @@ public:
      * @param _userLogName Le nom d'utilisateur spécifique aux logs
      * @param _userName Le nom d'utilisateur d'origine
      */
-    RequestVisitor(string _userLogName, string _userName)
-            : userLogName(move(_userLogName)), userName(move(_userName)) {}
+    RequestVisitor(std::string _userLogName, std::string _userName)
+        : userLogName(move(_userLogName)), userName(move(_userName)) {}
 
     /**
      * Constructeur par copie du request visitor.
@@ -65,8 +72,15 @@ public:
     virtual ~RequestVisitor() = default;
 
 protected:
-    string userLogName;
-    string userName;
+    std::string userLogName;
+    std::string userName;
 };
+
+inline std::ostream &operator<<(std::ostream &os, const RequestVisitor &requestVisitor) {
+    os << "RequestVisitor{userLogName=" << requestVisitor.userLogName
+       << ", userName=" << requestVisitor.userName
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_REQUESTVISITOR_H

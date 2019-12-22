@@ -9,7 +9,10 @@
                             - milene.daugan@insa-lyon.fr
                             - loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
+#include <sstream>
 #include "Log.h"
+
+using namespace std;
 
 /**
  * Initialise les ensembles de requêtes et de documents.

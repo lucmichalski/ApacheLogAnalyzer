@@ -14,31 +14,37 @@
 
 #include <string>
 
-using namespace std;
-
 /**
  * Le rôle de la classe HTTPRequestData est en lien avec celui de la classe RequestData
  */
 class HTTPRequestData {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend std::ostream &operator<<(std::ostream &os, const HTTPRequestData &httpRequestData);
+
+    /**
      * @return La méthode HTTP de la requête
      */
-    const string &GetMethod() const {
+    const std::string &GetMethod() const {
         return method;
     }
 
     /**
      * @return L'URL du document ciblé
      */
-    const string &GetUrl() const {
+    const std::string &GetUrl() const {
         return URL;
     }
 
     /**
      * @return La version du protocole HTTP
      */
-    const string &GetVersion() const {
+    const std::string &GetVersion() const {
         return version;
     }
 
@@ -55,7 +61,7 @@ public:
      * @param _URL L'URL du document ciblé
      * @param _version La version du protocole HTTP
      */
-    HTTPRequestData(string _method, string _URL, string _version)
+    HTTPRequestData(std::string _method, std::string _URL, std::string _version)
             : method(move(_method)), URL(move(_URL)), version(move(_version)) {}
 
     /**
@@ -73,9 +79,17 @@ public:
     virtual ~HTTPRequestData() = default;
 
 protected:
-    string method;
-    string URL;
-    string version;
+    std::string method;
+    std::string URL;
+    std::string version;
 };
+
+inline std::ostream &operator<<(std::ostream &os, const HTTPRequestData &httpRequestData) {
+    os << "HTTPRequestData{method=" << httpRequestData.method
+       << ", URL=" << httpRequestData.URL
+       << ", version=" << httpRequestData.version
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_HTTPREQUESTDATA_H

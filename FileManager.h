@@ -21,6 +21,14 @@
  */
 class FileManager {
 public:
+    /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend std::ostream &operator<<(std::ostream &os, const FileManager &fileManager);
+
 	/**
 	 * Récupère et importe l'ensemble des informations contenues dans le fichier de log spécifié.
 	 *
@@ -30,7 +38,7 @@ public:
 	 *  (fichier introuvable, problème de permission, le format d'une ligne de log est incorrect, chemin incorrect)
 	 *  // TODO : exceptions OK ?
 	 */
-	Log *ImportLogFile(const string &fileName) const;
+	Log *ImportLogFile(const std::string &fileName) const;
 
 	/**
 	 * Créer le fichier .dot correspondant à l'instance de la classe Log spécifiée. Écrase le fichier existant.
@@ -41,7 +49,7 @@ public:
 	 * @throws exception Si un problème de permissions ou de chemin incorrect est détecté
 	 * // TODO : exceptions OK ?
 	 */
-	void CreateDotFile(const string &dotFileName, const Log &log) const;
+	void CreateDotFile(const std::string &dotFileName, const Log &log) const;
 
 	/**
 	 * Constructeur par défaut de la classe.
@@ -63,15 +71,19 @@ protected:
 	 * @return Un ensemble non-ordonné de lignes du fichier de log importé
 	 * // TODO : Exception(s) levée(s) ?
 	 */
-	 unordered_set<string *> *extractLogLines( ifstream &logFile) const;
+	 std::unordered_set<std::string *> *extractLogLines(std::ifstream &logFile) const;
 
 	/**
 	 * Détruit l'ensemble ainsi que les chaînes qu'il contient.
 	 *
 	 * @param logLines L'ensemble de lignes de log à détruire
 	 */
-	void deleteLogLines(const unordered_set<const string *> *logLines) const;
+	void deleteLogLines(const std::unordered_set<const std::string *> *logLines) const;
 };
 
+inline std::ostream &operator<<(std::ostream &os, const FileManager &fileManager) {
+    os << "FileManager{}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_FILEMANAGER_H

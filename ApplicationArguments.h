@@ -13,8 +13,7 @@ ApplicationArguments - Arguments spécifiés à l'application lors de son lancem
 #define APACHELOGANALYZER_APPLICATIONARGUMENTS_H
 
 #include <string>
-
-using namespace std;
+#include <iostream>
 
 /**
  * ApplicationArguments contient l'ensemble des données sur les arguments de l'application spécifiés au lancement
@@ -23,65 +22,82 @@ using namespace std;
  */
 class ApplicationArguments {
 public:
-	/**
-	 * @return La référence sur le nom du fichier de log à importer
-	 */
-	const string &GetLogFileName() const {
-		return logFileName;
-	}
+    /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend std::ostream &operator<<(std::ostream &os, const ApplicationArguments &applicationArguments);
 
-	/**
-	 * @return "true" si les extensions css, js et image doivent être exclus, "false" sinon
-	 */
-	bool IsExcludeExtensions() const {
-		return excludeExtensions;
-	}
+    /**
+     * @return La référence sur le nom du fichier de log à importer
+     */
+    const std::string &GetLogFileName() const {
+        return logFileName;
+    }
 
-	/**
-	 * @return Un nombre entre 0 et 23 correspondant au créneau horaire sur lequel on souhaite conserver les
-	 *      logs, ou -1 si aucun filtrage ne doit être effectué
-	 */
-	int GetFilterHour() const {
-		return filterHour;
-	}
+    /**
+     * @return "true" si les extensions css, js et image doivent être exclus, "false" sinon
+     */
+    bool IsExcludeExtensions() const {
+        return excludeExtensions;
+    }
 
-	/**
-	 * @return Le nom du fichier .dot à générer. Si la chaîne est vide, alors aucun fichier ne sera généré
-	 */
-	const string &GetDotFileName() const {
-		return dotFileName;
-	}
+    /**
+     * @return Un nombre entre 0 et 23 correspondant au créneau horaire sur lequel on souhaite conserver les
+     *      logs, ou -1 si aucun filtrage ne doit être effectué
+     */
+    int GetFilterHour() const {
+        return filterHour;
+    }
 
-	/**
-	 * Constructeur des arguments de l'application.
-	 *
-	 * @param _logFileName Le nom du fichier de log à importer
-	 * @param _excludeExtensions "true" si les extensions css, image et js doivent être exclus, "false" sinon
-	 * @param _filterHour L'heure à utiliser pour le filtrage du log (entre 0 et 23), -1 si aucun filtrage
-	 * @param _dotFileName Le nom du fichier .dot (de l'application GraphViz) à générer, chaîne vide si aucun fichier
-	 *      à générer
-	 */
-	ApplicationArguments(string _logFileName, bool _excludeExtensions, int _filterHour, string _dotFileName)
-			: logFileName(move(_logFileName)), excludeExtensions(_excludeExtensions), filterHour(_filterHour),
-			  dotFileName(move(_dotFileName)) {}
+    /**
+     * @return Le nom du fichier .dot à générer. Si la chaîne est vide, alors aucun fichier ne sera généré
+     */
+    const std::string &GetDotFileName() const {
+        return dotFileName;
+    }
 
-	/**
-	 * Constructeur par copie.
-	 * Comportement par défaut.
-	 */
-	ApplicationArguments(const ApplicationArguments &applicationArguments) = default;
+    /**
+     * Constructeur des arguments de l'application.
+     *
+     * @param _logFileName Le nom du fichier de log à importer
+     * @param _excludeExtensions "true" si les extensions css, image et js doivent être exclus, "false" sinon
+     * @param _filterHour L'heure à utiliser pour le filtrage du log (entre 0 et 23), -1 si aucun filtrage
+     * @param _dotFileName Le nom du fichier .dot (de l'application GraphViz) à générer, chaîne vide si aucun fichier
+     *      à générer
+     */
+    ApplicationArguments(std::string _logFileName, bool _excludeExtensions, int _filterHour, std::string _dotFileName)
+        : logFileName(move(_logFileName)), excludeExtensions(_excludeExtensions), filterHour(_filterHour),
+          dotFileName(move(_dotFileName)) {}
 
-	/**
-	 * Destructeur de l'instance.
-	 * Comportement par défaut.
-	 */
-	virtual ~ApplicationArguments() = default;
+    /**
+     * Constructeur par copie.
+     * Comportement par défaut.
+     */
+    ApplicationArguments(const ApplicationArguments &applicationArguments) = default;
+
+    /**
+     * Destructeur de l'instance.
+     * Comportement par défaut.
+     */
+    virtual ~ApplicationArguments() = default;
 
 protected:
-	string logFileName;
-	bool excludeExtensions = false;
-	int filterHour = -1;
-	string dotFileName;
+    std::string logFileName;
+    bool excludeExtensions = false;
+    int filterHour = -1;
+    std::string dotFileName;
 };
+
+inline std::ostream &operator<<(std::ostream &os, const ApplicationArguments &applicationArguments) {
+    os << "ApplicationArguments{logFileName=" << applicationArguments.logFileName
+       << ", excludeExtensions=" << std::boolalpha << applicationArguments.excludeExtensions
+       << ", filterHour=" << applicationArguments.filterHour
+       << ", dotFileName=" << applicationArguments.dotFileName
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_APPLICATIONARGUMENTS_H
