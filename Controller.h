@@ -32,7 +32,7 @@ public:
      *
      * @return Le fichier de sortie en paramètre
      */
-    friend ostream &operator<<(ostream &os, const Controller &controller);
+    friend std::ostream &operator<<(std::ostream &os, const Controller &controller);
 
     /**
      * Constructeur du contrôleur de l'application.
@@ -86,7 +86,7 @@ protected:
      * @param documentsHits Les associations entre un document et son nombre de hits.
      * @param max Le nombre maximum de documents à afficher
      */
-    void showTopDocuments(const vector<const DocumentHits *> &documentsHits, int max) const;
+    void showTopDocuments(const std::vector<const DocumentHits *> &documentsHits, int max) const;
 
     /**
      * Génération du fichier .dot à partir des informations du fichier de log importé.
@@ -101,7 +101,7 @@ protected:
     Log *log = nullptr;
 };
 
-inline ostream &operator<<(ostream &os, const Controller &controller) {
+inline std::ostream &operator<<(std::ostream &os, const Controller &controller) {
     os << "Controller{logManager=" << controller.logManager
        << ", fileManager=" << controller.fileManager
        << ", applicationArguments=" << controller.applicationArguments

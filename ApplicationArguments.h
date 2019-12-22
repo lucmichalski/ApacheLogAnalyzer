@@ -15,8 +15,6 @@ ApplicationArguments - Arguments spécifiés à l'application lors de son lancem
 #include <string>
 #include <iostream>
 
-using namespace std;
-
 /**
  * ApplicationArguments contient l'ensemble des données sur les arguments de l'application spécifiés au lancement
  * de celle-ci. Il s'agit d'un simple conteneur sans logique d'implémenter (responsabilité déléguée au reste
@@ -30,12 +28,12 @@ public:
      *
      * @return Le fichier de sortie en paramètre
      */
-    friend ostream &operator<<(ostream &os, const ApplicationArguments &applicationArguments);
+    friend std::ostream &operator<<(std::ostream &os, const ApplicationArguments &applicationArguments);
 
 	/**
 	 * @return La référence sur le nom du fichier de log à importer
 	 */
-	const string &GetLogFileName() const {
+	const std::string &GetLogFileName() const {
 		return logFileName;
 	}
 
@@ -57,7 +55,7 @@ public:
 	/**
 	 * @return Le nom du fichier .dot à générer. Si la chaîne est vide, alors aucun fichier ne sera généré
 	 */
-	const string &GetDotFileName() const {
+	const std::string &GetDotFileName() const {
 		return dotFileName;
 	}
 
@@ -70,7 +68,7 @@ public:
 	 * @param _dotFileName Le nom du fichier .dot (de l'application GraphViz) à générer, chaîne vide si aucun fichier
 	 *      à générer
 	 */
-	ApplicationArguments(string _logFileName, bool _excludeExtensions, int _filterHour, string _dotFileName)
+	ApplicationArguments(std::string _logFileName, bool _excludeExtensions, int _filterHour, std::string _dotFileName)
 			: logFileName(move(_logFileName)), excludeExtensions(_excludeExtensions), filterHour(_filterHour),
 			  dotFileName(move(_dotFileName)) {}
 
@@ -87,15 +85,15 @@ public:
 	virtual ~ApplicationArguments() = default;
 
 protected:
-	string logFileName;
+	std::string logFileName;
 	bool excludeExtensions = false;
 	int filterHour = -1;
-	string dotFileName;
+	std::string dotFileName;
 };
 
-inline ostream &operator<<(ostream &os, const ApplicationArguments &applicationArguments) {
+inline std::ostream &operator<<(std::ostream &os, const ApplicationArguments &applicationArguments) {
     os << "ApplicationArguments{logFileName=" << applicationArguments.logFileName
-        << ", excludeExtensions=" << boolalpha << applicationArguments.excludeExtensions
+        << ", excludeExtensions=" << std::boolalpha << applicationArguments.excludeExtensions
         << ", filterHour=" << applicationArguments.filterHour
         << ", dotFileName=" << applicationArguments.dotFileName
         << "}";

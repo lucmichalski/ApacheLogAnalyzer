@@ -21,10 +21,14 @@ using namespace std;
  */
 Controller::Controller(int argc,char **argv) {
 	fileManager = new FileManager();
+	cout << "fileManager=" << *fileManager << endl;
 	logManager = new LogManager();
+	cout << "logManager=" << *logManager << endl;
 	try {
 		createApplicationArguments(argc,argv);
+		cout << "applicationArguments=" << *applicationArguments << endl;
 		registerLogFile();
+		cout << "log=" << *log << endl;
 		const Log *filteredLog = filterLog();
 		if (applicationArguments->GetDotFileName().empty()) {
 			const vector<const DocumentHits *> *documentsHits = logManager->GetDocumentsHits(*filteredLog);

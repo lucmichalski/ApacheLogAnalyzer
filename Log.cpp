@@ -12,26 +12,7 @@
 #include <sstream>
 #include "Log.h"
 
-ostream &operator<<(ostream &os, const Log &log) {
-    os << "Log{requests=[";
-    for (unordered_set<const Request *>::iterator it = log.requests->begin(); it != log.requests->end(); ++it) {
-        const Request *const request = *it;
-        if (it != log.requests->begin()) {
-            os << ", ";
-        }
-        os << request;
-    }
-    os << "], documents=[";
-    for (unordered_set<const Document *>::iterator it = log.documents->begin(); it != log.documents->end(); ++it) {
-        const Document *const document = *it;
-        if (it != log.documents->begin()) {
-            os << ", ";
-        }
-        os << document;
-    }
-    os << "]}";
-    return os;
-}
+using namespace std;
 
 /**
  * Initialise les ensembles de requêtes et de documents.

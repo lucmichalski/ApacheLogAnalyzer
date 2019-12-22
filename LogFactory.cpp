@@ -11,6 +11,8 @@
 *************************************************************************/
 #include "LogFactory.h"
 
+using namespace std;
+
 /**
  * Parcours et analyse l'ensemble des lignes de log et créer progressivement
  * l'instance de la classe Log en créant également des instances de Request

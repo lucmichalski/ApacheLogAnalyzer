@@ -28,7 +28,7 @@ public:
      *
      * @return Le fichier de sortie en paramètre
      */
-    friend ostream &operator<<(ostream &os, const Request &request);
+    friend std::ostream &operator<<(std::ostream &os, const Request &request);
 
     /**
      * @return La référence sur le document source de la requête HTTP.
@@ -83,7 +83,7 @@ protected:
     time_t date = 0;
 };
 
-inline ostream &operator<<(ostream &os, const Request &request) {
+inline std::ostream &operator<<(std::ostream &os, const Request &request) {
     os << "Request{srcDocument=" << request.srcDocument
        << ", destDocument=" << request.destDocument
        << ", date=" << request.date

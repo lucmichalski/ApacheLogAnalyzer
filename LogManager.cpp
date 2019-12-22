@@ -11,6 +11,8 @@
 *************************************************************************/
 #include "LogManager.h"
 
+using namespace std;
+
 /**
  * Créer une copie de l'instance de la classe Log spécifiée puis compare les extensions des documents source
  * et destination et de chaque requête avec les extensions passées en paramètre. La requête est retirée de

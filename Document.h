@@ -16,7 +16,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-using namespace std;
 
 /**
  * La classe document permet de représenter un document par son URL correspondant
@@ -30,7 +29,7 @@ public:
      *
      * @return Le fichier de sortie en paramètre
      */
-    friend ostream &operator<<(ostream &os, const Document &document);
+    friend std::ostream &operator<<(std::ostream &os, const Document &document);
 
     /**
      * Opérateur d'égalité. Test si le document courant et le document passé en paramètre
@@ -46,21 +45,21 @@ public:
     /**
      * @return La référence sur l'URL du document
      */
-    const string &GetURL() const {
+    const std::string &GetURL() const {
         return URL;
     }
 
     /**
      * @return La chaîne représentant l'extension du document
      */
-    string GetExtension();
+    std::string GetExtension();
 
     /**
      * Constructeur d'un document.
      *
      * @param url Le pointeur sur l'URL du document à créer
      */
-    explicit Document(string _URL) : URL(move(_URL)) {}
+    explicit Document(std::string _URL) : URL(move(_URL)) {}
 
     /**
      * Constructeur par copie d'un document.
@@ -77,10 +76,10 @@ public:
     virtual ~Document() = default;
 
 protected:
-    string URL;
+    std::string URL;
 };
 
-inline ostream &operator<<(ostream &os, const Document &document) {
+inline std::ostream &operator<<(std::ostream &os, const Document &document) {
     os << "Document{URL=" + document.URL + "}";
     return os;
 }
