@@ -15,8 +15,6 @@
 #include <unordered_set>
 #include "Request.h"
 
-using namespace std;
-
 /**
  * La classe Log représente le fichier de log importé en étant associé à la liste des
  * requêtes Request et la liste des documents Document.
@@ -29,19 +27,19 @@ public:
      *
      * @return Le fichier de sortie en paramètre
      */
-    friend ostream &operator<<(ostream &os, const Log &log);
+    friend std::ostream &operator<<(std::ostream &os, const Log &log);
 
 	/**
 	 * @return Le pointeur sur l'ensemble des requêtes du log
 	 */
-	const unordered_set<const Request *> *GetRequests() const {
+	const std::unordered_set<const Request *> *GetRequests() const {
 		return requests;
 	}
 
 	/**
 	 * @return Le pointeur sur l'ensemble des documents du log
 	 */
-	const unordered_set<const Document *> *GetDocuments() const {
+	const std::unordered_set<const Document *> *GetDocuments() const {
 		return documents;
 	}
 
@@ -92,7 +90,7 @@ protected:
 	 * @param URL La référence à l'URL du document à rechercher
 	 * @return Le pointeur du document associé à l'URL s'il existe, nullptr sinon
 	 */
-	const Document *getDocument(const string &URL) const;
+	const Document *getDocument(const std::string &URL) const;
 
 	/**
 	 * Cherche et retourne le pointeur sur la requête associée aux paramètres spécifiés si elle existe, nullptr sinon
@@ -106,8 +104,29 @@ protected:
 
 	// TODO : Pointeur constant
 
-	unordered_set<const Request *> *requests = nullptr;
-	unordered_set<const Document *> *documents = nullptr;
+	std::unordered_set<const Request *> *requests = nullptr;
+	std::unordered_set<const Document *> *documents = nullptr;
 };
+
+inline std::ostream &operator<<(std::ostream &os, const Log &log) {
+    os << "Log{requests=[";
+    for (std::unordered_set<const Request *>::iterator it = log.requests->begin(); it != log.requests->end(); ++it) {
+        const Request *const request = *it;
+        if (it != log.requests->begin()) {
+            os << ", ";
+        }
+        os << request;
+    }
+    os << "], documents=[";
+    for (std::unordered_set<const Document *>::iterator it = log.documents->begin(); it != log.documents->end(); ++it) {
+        const Document *const document = *it;
+        if (it != log.documents->begin()) {
+            os << ", ";
+        }
+        os << document;
+    }
+    os << "]}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_LOG_H

@@ -11,6 +11,8 @@
 *************************************************************************/
 #include "Document.h"
 
+using namespace std;
+
 /**
  * Analyse l'URL avec une Regex pour déterminer l'extension du document puis la retourne.
  */

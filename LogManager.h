@@ -27,7 +27,7 @@ public:
      *
      * @return Le fichier de sortie en paramètre
      */
-    friend ostream &operator<<(ostream &os, const LogManager &logManager);
+    friend std::ostream &operator<<(std::ostream &os, const LogManager &logManager);
 
     /**
      * Créer une copie de l'instance de la classe Log spécifiée puis applique un filtrage sur
@@ -36,7 +36,7 @@ public:
      * @param _log L'instance de la classe Log correspondant au fichier de log importé
      * @return La copie de l'instance de la classe Log spécifiée filtrée sur les extensions
      */
-    const Log *FilterByExtensions(const Log &_log, const vector<string> &extensions) const;
+    const Log *FilterByExtensions(const Log &_log, const std::vector<std::string> &extensions) const;
 
     /**
      * Créer une copie de l'instance de la classe Log spécifiée puis applique un filtrage dessus
@@ -58,7 +58,7 @@ public:
      * @param log L'instance de la classe Log représentant le fichier de log importé
      * @return Un vecteur d'association entre un document et son nombre de hits
      */
-    const vector<const DocumentHits *> *GetDocumentsHits(const Log &log) const;
+    const std::vector<const DocumentHits *> *GetDocumentsHits(const Log &log) const;
 
     /**
      * Détruit le vecteur ainsi que les associations entre un document et son nombre de hits DocumentHits
@@ -66,7 +66,7 @@ public:
      *
      * @param documentsHits Le vecteur d'associations entre un document et son nombre de hits
      */
-    void DeleteDocumentsHits(const vector<const DocumentHits *> *documentsHits) const;
+    void DeleteDocumentsHits(const std::vector<const DocumentHits *> *documentsHits) const;
 
     /**
      * Tri le vecteur d'associations entre un document et son nombre de hits par ordre décroissant du nombre
@@ -75,7 +75,7 @@ public:
      * @param documentsHits La vecteur d'associations entre un document et son nombre de hits
      * @return Le pointeur sur le vecteur passé en paramètre trié
      */
-    const vector<const DocumentHits *> *SortByHits(const vector<const DocumentHits *> &documentsHits) const;
+    const std::vector<const DocumentHits *> *SortByHits(const std::vector<const DocumentHits *> &documentsHits) const;
 
     /**
      * // TODO : Spécifications à détailler !
@@ -87,7 +87,7 @@ public:
     int CountTimelessRequestsEquals(const Log &log, const Request &request) const;
 };
 
-inline ostream &operator<<(ostream &os, const LogManager &logManager) {
+inline std::ostream &operator<<(std::ostream &os, const LogManager &logManager) {
     os << "LogManager{}";
     return os;
 }

@@ -26,7 +26,7 @@ public:
      *
      * @return Le fichier de sortie en paramètre
      */
-    friend ostream &operator<<(ostream &os, const DocumentHits &documentHits);
+    friend std::ostream &operator<<(std::ostream &os, const DocumentHits &documentHits);
 
 	/**
 	 * @return La référence constante au document associé au nombre de hits
@@ -70,7 +70,7 @@ protected:
 	int nbHits = 0;
 };
 
-inline ostream &operator<<(ostream &os, const DocumentHits &documentHits) {
+inline std::ostream &operator<<(std::ostream &os, const DocumentHits &documentHits) {
     os << "DocumentHits{document=" << documentHits.document << ", nbHits=" << documentHits.nbHits << "}";
     return os;
 }
