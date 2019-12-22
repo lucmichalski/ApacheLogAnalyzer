@@ -29,6 +29,14 @@ class RequestData {
     // TODO : rendre les mutateurs privés mais friend avec la méthode créant le RequestData
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const RequestData &requestData);
+
+    /**
      * @return L'adresse IPv4 du client de la requête HTTP
      */
     const string &GetClientAddress() const {
@@ -186,5 +194,18 @@ protected:
     RequestVisitor requestVisitor;
     HTTPRequestData httpRequestData;
 };
+
+inline ostream &operator<<(ostream &os, const RequestData &requestData) {
+    os << "RequestData{clientAddress=" << requestData.clientAddress
+       << ", date=" << requestData.date
+       << ", returnCode=" << requestData.returnCode
+       << ", answerSize=" << requestData.answerSize
+       << ", refererURL=" << requestData.refererURL
+       << ", browserId=" << requestData.browserId
+       << ", requestVisitor=" << requestData.requestVisitor
+       << ", httpRequestData=" << requestData.httpRequestData
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_REQUESTDATA_H

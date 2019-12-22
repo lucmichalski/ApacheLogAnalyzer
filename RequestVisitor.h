@@ -13,6 +13,7 @@
 #define APACHELOGANALYZER_REQUESTVISITOR_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -21,6 +22,14 @@ using namespace std;
  */
 class RequestVisitor {
 public:
+    /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const RequestVisitor &requestVisitor);
+
     /**
      * @return Le nom d'utilisateur spécifique aux logs
      */
@@ -68,5 +77,12 @@ protected:
     string userLogName;
     string userName;
 };
+
+inline ostream &operator<<(ostream &os, const RequestVisitor &requestVisitor) {
+    os << "RequestVisitor{userLogName=" << requestVisitor.userLogName
+       << ", userName=" << requestVisitor.userName
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_REQUESTVISITOR_H

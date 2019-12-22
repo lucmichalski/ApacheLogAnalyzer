@@ -22,6 +22,14 @@
 class LogManager {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const LogManager &logManager);
+
+    /**
      * Créer une copie de l'instance de la classe Log spécifiée puis applique un filtrage sur
      * les requêtes en excluant les extensions des documents avant de retourner la copie.
      *
@@ -78,6 +86,11 @@ public:
      */
     int CountTimelessRequestsEquals(const Log &log, const Request &request) const;
 };
+
+inline ostream &operator<<(ostream &os, const LogManager &logManager) {
+    os << "LogManager{}";
+    return os;
+}
 
 
 #endif //APACHELOGANALYZER_LOGMANAGER_H

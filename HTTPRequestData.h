@@ -22,6 +22,14 @@ using namespace std;
 class HTTPRequestData {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const HTTPRequestData &httpRequestData);
+
+    /**
      * @return La méthode HTTP de la requête
      */
     const string &GetMethod() const {
@@ -77,5 +85,13 @@ protected:
     string URL;
     string version;
 };
+
+inline ostream &operator<<(ostream &os, const HTTPRequestData &httpRequestData) {
+    os << "HTTPRequestData{method=" << httpRequestData.method
+       << ", URL=" << httpRequestData.URL
+       << ", version=" << httpRequestData.version
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_HTTPREQUESTDATA_H

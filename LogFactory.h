@@ -22,6 +22,14 @@
 class LogFactory {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const LogFactory &logFactory);
+
+    /**
      * Créer un Log ainsi que les Request et Document associés et le retourne ensuite.
      * La suppression du log est à la charge de l'appelant.
      *
@@ -39,5 +47,10 @@ protected:
      */
     const RequestData analyzeLogLine(const string &logLine) const;
 };
+
+inline ostream &operator<<(ostream &os, const LogFactory &logFactory) {
+    os << "LogFactory{}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_LOGFACTORY_H
