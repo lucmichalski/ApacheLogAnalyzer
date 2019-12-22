@@ -14,6 +14,7 @@
 
 #include "Log.h"
 #include "RequestData.h"
+#include "Date.h"
 
 /**
  * LogFactory a pour rôle d'instancier la classe Log ainsi que les classes associées (Document et Request)
@@ -45,7 +46,15 @@ protected:
      * @param logLine La ligne de log à analyser
      * @return Le request data correspondant aux données de la ligne de log
      */
-    const RequestData analyzeLogLine(const std::string &logLine) const;
+    const RequestData *analyzeLogLine(const std::string &logLine) const;
+
+    /**
+     * Créer la date à partir de la chaîne de caractères spécifiées venant du fichier de log lu.
+     *
+     * @param date La date sous forme de chaîne de caractères avec comme format celui du fichier de log lu
+     * @return La date correspondante sous la forme d'une instance de la classe Date
+     */
+    Date createDate(std::string &date) const;
 };
 
 inline std::ostream &operator<<(std::ostream &os, const LogFactory &logFactory) {
