@@ -1,13 +1,13 @@
 /*************************************************************************
-          Document - Représente un document identifié par une URL
+		  Document - Représente un document identifié par une URL
 							 -------------------
 	début                : 11/12/2019
 	copyright            : (C) 2019 par :
-                            - Milène DAUGAN
-                            - Loïc DUBOIS-TERMOZ
+							- Milène DAUGAN
+							- Loïc DUBOIS-TERMOZ
 	e-mail               :
-                            - milene.daugan@insa-lyon.fr
-                            - loic.dubois-termoz@insa-lyon.fr
+							- milene.daugan@insa-lyon.fr
+							- loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
 #ifndef APACHELOGANALYZER_DOCUMENT_H
 #define APACHELOGANALYZER_DOCUMENT_H
@@ -24,52 +24,56 @@ using namespace std;
  */
 class Document {
 public:
-    /**
-     * Opérateur d'égalité. Test si le document courant et le document passé en paramètre
-     * sont égaux (comparaison des URLs).
-     *
-     * @param document Le second document de comparaison
-     * @return "true" si les deux documents sont égaux, "false" sinon
-     */
-    bool operator==(const Document &document) const {
-        return GetURL() == document.GetURL();
-    }
+	/**
+	 * Opérateur d'égalité. Test si le document courant et le document passé en paramètre
+	 * sont égaux (comparaison des URLs).
+	 *
+	 * @param document Le second document de comparaison
+	 * @return "true" si les deux documents sont égaux, "false" sinon
+	 */
+	bool operator==(const Document &document) const {
+		return GetURL() == document.GetURL();
+	}
 
-    /**
-     * @return La référence sur l'URL du document
-     */
-    const string &GetURL() const {
-        return URL;
-    }
+	friend ostream & operator<<(ostream &flux, Document const& document) {
+	return flux << document.GetURL();
+	}
 
-    /**
-     * @return La chaîne représentant l'extension du document
-     */
-    string GetExtension();
+	/**
+	 * @return La référence sur l'URL du document
+	 */
+	const string &GetURL() const {
+		return URL;
+	}
 
-    /**
-     * Constructeur d'un document.
-     *
-     * @param url Le pointeur sur l'URL du document à créer
-     */
-    explicit Document(string _URL) : URL(move(_URL)) {}
+	/**
+	 * @return La chaîne représentant l'extension du document
+	 */
+	string GetExtension();
 
-    /**
-     * Constructeur par copie d'un document.
-     * Comportement par défaut.
-     *
-     * @param document La référence du document à copier
-     */
-    Document(const Document &document) = default;
+	/**
+	 * Constructeur d'un document.
+	 *
+	 * @param url Le pointeur sur l'URL du document à créer
+	 */
+	explicit Document(string _URL) : URL(move(_URL)) {}
 
-    /**
-     * Destructeur du document.
-     * Comportement par défaut.
-     */
-    virtual ~Document() = default;
+	/**
+	 * Constructeur par copie d'un document.
+	 * Comportement par défaut.
+	 *
+	 * @param document La référence du document à copier
+	 */
+	Document(const Document &document) = default;
+
+	/**
+	 * Destructeur du document.
+	 * Comportement par défaut.
+	 */
+	virtual ~Document() = default;
 
 protected:
-    string URL;
+	string URL;
 };
 
 #endif //APACHELOGANALYZER_DOCUMENT_H

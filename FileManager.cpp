@@ -10,6 +10,7 @@
 							- loic.dubois-termoz@insa-lyon.fr
 *************************************************************************/
 #include "FileManager.h"
+//#include <fstream>
 
 /**
  * Ouvre le fichier en lecture et stock chaque ligne lue dans un ensemble non-ordonné puis le retourne
@@ -41,6 +42,19 @@ Log *FileManager::ImportLogFile(const string &fileName) const {
 void FileManager::CreateDotFile(const string &dotFileName, const Log &log) const {
 	// TODO : Création du fichier .dot en fonction de l'instance de la classe Log spécifiée
 	// SPECIFICATIONS A PRECISER !!! concernant la déléguation du traitement du Log pour le fichier .dot
+	ofstream write(dotFileName.c_str());
+	if (write) {
+		write << "digraph {" << endl;
+		for (const Document *const document : *log.GetDocuments())
+		{
+			write << *document << endl;
+		}
+		write << "}";
+	} else {
+		cerr << "Erreur d'ouverture du fichier." << endl;
+	}
+	write.close();
+
 }
 
 /**
