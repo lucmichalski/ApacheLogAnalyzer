@@ -27,6 +27,14 @@ const int MAX_DOCUMENTS_SHOW = 10;
 class Controller {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const Controller &controller);
+
+    /**
      * Constructeur du contrôleur de l'application.
      *
      * @param argv Liste des arguments saisies par l'utilisateur
@@ -92,5 +100,14 @@ protected:
     ApplicationArguments *applicationArguments = nullptr;
     Log *log = nullptr;
 };
+
+inline ostream &operator<<(ostream &os, const Controller &controller) {
+    os << "Controller{logManager=" << controller.logManager
+       << ", fileManager=" << controller.fileManager
+       << ", applicationArguments=" << controller.applicationArguments
+       << ", log=" << controller.log
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_CONTROLLER_H

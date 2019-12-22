@@ -25,6 +25,14 @@ using namespace std;
 class Document {
 public:
     /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const Document &document);
+
+    /**
      * Opérateur d'égalité. Test si le document courant et le document passé en paramètre
      * sont égaux (comparaison des URLs).
      *
@@ -71,5 +79,10 @@ public:
 protected:
     string URL;
 };
+
+inline ostream &operator<<(ostream &os, const Document &document) {
+    os << "Document{URL=" + document.URL + "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_DOCUMENT_H

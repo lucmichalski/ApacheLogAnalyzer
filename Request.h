@@ -13,6 +13,7 @@ Request  -  Représente une requête HTTP enregistrée dans le fichier de log im
 #define APACHELOGANALYZER_REQUEST_H
 
 #include <ctime>
+#include <sstream>
 #include "Document.h"
 
 /**
@@ -21,6 +22,14 @@ Request  -  Représente une requête HTTP enregistrée dans le fichier de log im
  */
 class Request {
 public:
+    /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const Request &request);
+
     /**
      * @return La référence sur le document source de la requête HTTP.
      */
@@ -73,5 +82,13 @@ protected:
     const Document &destDocument;
     time_t date = 0;
 };
+
+inline ostream &operator<<(ostream &os, const Request &request) {
+    os << "Request{srcDocument=" << request.srcDocument
+       << ", destDocument=" << request.destDocument
+       << ", date=" << request.date
+       << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_REQUEST_H

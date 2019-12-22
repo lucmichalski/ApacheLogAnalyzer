@@ -21,6 +21,14 @@
  */
 class FileManager {
 public:
+    /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const FileManager &fileManager);
+
 	/**
 	 * Récupère et importe l'ensemble des informations contenues dans le fichier de log spécifié.
 	 *
@@ -73,5 +81,9 @@ protected:
 	void deleteLogLines(const unordered_set<const string *> *logLines) const;
 };
 
+inline ostream &operator<<(ostream &os, const FileManager &fileManager) {
+    os << "FileManager{}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_FILEMANAGER_H

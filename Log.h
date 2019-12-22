@@ -23,6 +23,14 @@ using namespace std;
  */
 class Log {
 public:
+    /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const Log &log);
+
 	/**
 	 * @return Le pointeur sur l'ensemble des requêtes du log
 	 */

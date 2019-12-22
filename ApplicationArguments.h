@@ -13,6 +13,7 @@ ApplicationArguments - Arguments spécifiés à l'application lors de son lancem
 #define APACHELOGANALYZER_APPLICATIONARGUMENTS_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -23,6 +24,14 @@ using namespace std;
  */
 class ApplicationArguments {
 public:
+    /**
+     * Permet de consulter la description du contenu de l'objet manipulé en affichant
+     * sur la sortie standard une chaîne de caractères comportant les valeurs de chaque attribut.
+     *
+     * @return Le fichier de sortie en paramètre
+     */
+    friend ostream &operator<<(ostream &os, const ApplicationArguments &applicationArguments);
+
 	/**
 	 * @return La référence sur le nom du fichier de log à importer
 	 */
@@ -83,5 +92,14 @@ protected:
 	int filterHour = -1;
 	string dotFileName;
 };
+
+inline ostream &operator<<(ostream &os, const ApplicationArguments &applicationArguments) {
+    os << "ApplicationArguments{logFileName=" << applicationArguments.logFileName
+        << ", excludeExtensions=" << boolalpha << applicationArguments.excludeExtensions
+        << ", filterHour=" << applicationArguments.filterHour
+        << ", dotFileName=" << applicationArguments.dotFileName
+        << "}";
+    return os;
+}
 
 #endif //APACHELOGANALYZER_APPLICATIONARGUMENTS_H
