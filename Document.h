@@ -62,13 +62,6 @@ public:
     explicit Document(std::string _URL) : URL(move(_URL)) {}
 
 	/**
-	 * Constructeur d'un document.
-	 *
-	 * @param url Le pointeur sur l'URL du document à créer
-	 */
-	explicit Document(string _URL) : URL(move(_URL)) {}
-
-	/**
 	 * Constructeur par copie d'un document.
 	 * Comportement par défaut.
 	 *
