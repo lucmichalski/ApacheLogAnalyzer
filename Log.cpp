@@ -72,7 +72,7 @@ const Document *Log::getDocument(const string &URL) const {
 /**
  * Parcours l'ensemble des requêtes du Log pour trouver une correspondance avec les paramètres spécifiés.
  */
-const Request *Log::getRequest(const Document &srcDocument, const Document &destDocument, time_t date) const {
+const Request *Log::getRequest(const Document &srcDocument, const Document &destDocument, const Date &date) const {
     for (const Request *request : *requests) {
         if (request->GetSrcDocument() == srcDocument
             && request->GetDestDocument() == destDocument

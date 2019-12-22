@@ -15,6 +15,7 @@ Request  -  Représente une requête HTTP enregistrée dans le fichier de log im
 #include <ctime>
 #include <sstream>
 #include "Document.h"
+#include "Date.h"
 
 /**
  * La classe Request représente une requête passée et stockée dans le fichier de log importé.
@@ -49,7 +50,7 @@ public:
      *
      * @return La date de la requête HTTP.
      */
-    const time_t GetDate() const {
+    const Date &GetDate() const {
         return date;
     }
 
@@ -60,7 +61,7 @@ public:
      * @param _destDocument Le pointeur du document destination de la requête
      * @param _date La date de la requête
      */
-    Request(const Document &_srcDocument, const Document &_destDocument, time_t _date)
+    Request(const Document &_srcDocument, const Document &_destDocument, Date _date)
         : srcDocument(_srcDocument), destDocument(_destDocument), date(_date) {}
 
     /**
@@ -80,7 +81,7 @@ public:
 protected:
     const Document &srcDocument;
     const Document &destDocument;
-    time_t date = 0;
+    Date date;
 };
 
 inline std::ostream &operator<<(std::ostream &os, const Request &request) {

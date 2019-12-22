@@ -100,7 +100,7 @@ protected:
      * @param date La date de la requête
      * @return Le pointeur sur la requête si elle existe, nullptr sinon
      */
-    const Request *getRequest(const Document &srcDocument, const Document &destDocument, time_t date) const;
+    const Request *getRequest(const Document &srcDocument, const Document &destDocument, const Date &date) const;
 
     // TODO : Pointeur constant
 
