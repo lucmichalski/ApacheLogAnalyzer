@@ -61,7 +61,7 @@ public:
      * @param _date La date de la requête
      */
     Request(const Document &_srcDocument, const Document &_destDocument, time_t _date)
-            : srcDocument(_srcDocument), destDocument(_destDocument), date(_date) {}
+        : srcDocument(_srcDocument), destDocument(_destDocument), date(_date) {}
 
     /**
      * Constructeur par copie d'une requête HTTP.

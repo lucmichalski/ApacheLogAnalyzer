@@ -30,73 +30,73 @@ public:
      */
     friend std::ostream &operator<<(std::ostream &os, const ApplicationArguments &applicationArguments);
 
-	/**
-	 * @return La référence sur le nom du fichier de log à importer
-	 */
-	const std::string &GetLogFileName() const {
-		return logFileName;
-	}
+    /**
+     * @return La référence sur le nom du fichier de log à importer
+     */
+    const std::string &GetLogFileName() const {
+        return logFileName;
+    }
 
-	/**
-	 * @return "true" si les extensions css, js et image doivent être exclus, "false" sinon
-	 */
-	bool IsExcludeExtensions() const {
-		return excludeExtensions;
-	}
+    /**
+     * @return "true" si les extensions css, js et image doivent être exclus, "false" sinon
+     */
+    bool IsExcludeExtensions() const {
+        return excludeExtensions;
+    }
 
-	/**
-	 * @return Un nombre entre 0 et 23 correspondant au créneau horaire sur lequel on souhaite conserver les
-	 *      logs, ou -1 si aucun filtrage ne doit être effectué
-	 */
-	int GetFilterHour() const {
-		return filterHour;
-	}
+    /**
+     * @return Un nombre entre 0 et 23 correspondant au créneau horaire sur lequel on souhaite conserver les
+     *      logs, ou -1 si aucun filtrage ne doit être effectué
+     */
+    int GetFilterHour() const {
+        return filterHour;
+    }
 
-	/**
-	 * @return Le nom du fichier .dot à générer. Si la chaîne est vide, alors aucun fichier ne sera généré
-	 */
-	const std::string &GetDotFileName() const {
-		return dotFileName;
-	}
+    /**
+     * @return Le nom du fichier .dot à générer. Si la chaîne est vide, alors aucun fichier ne sera généré
+     */
+    const std::string &GetDotFileName() const {
+        return dotFileName;
+    }
 
-	/**
-	 * Constructeur des arguments de l'application.
-	 *
-	 * @param _logFileName Le nom du fichier de log à importer
-	 * @param _excludeExtensions "true" si les extensions css, image et js doivent être exclus, "false" sinon
-	 * @param _filterHour L'heure à utiliser pour le filtrage du log (entre 0 et 23), -1 si aucun filtrage
-	 * @param _dotFileName Le nom du fichier .dot (de l'application GraphViz) à générer, chaîne vide si aucun fichier
-	 *      à générer
-	 */
-	ApplicationArguments(std::string _logFileName, bool _excludeExtensions, int _filterHour, std::string _dotFileName)
-			: logFileName(move(_logFileName)), excludeExtensions(_excludeExtensions), filterHour(_filterHour),
-			  dotFileName(move(_dotFileName)) {}
+    /**
+     * Constructeur des arguments de l'application.
+     *
+     * @param _logFileName Le nom du fichier de log à importer
+     * @param _excludeExtensions "true" si les extensions css, image et js doivent être exclus, "false" sinon
+     * @param _filterHour L'heure à utiliser pour le filtrage du log (entre 0 et 23), -1 si aucun filtrage
+     * @param _dotFileName Le nom du fichier .dot (de l'application GraphViz) à générer, chaîne vide si aucun fichier
+     *      à générer
+     */
+    ApplicationArguments(std::string _logFileName, bool _excludeExtensions, int _filterHour, std::string _dotFileName)
+        : logFileName(move(_logFileName)), excludeExtensions(_excludeExtensions), filterHour(_filterHour),
+          dotFileName(move(_dotFileName)) {}
 
-	/**
-	 * Constructeur par copie.
-	 * Comportement par défaut.
-	 */
-	ApplicationArguments(const ApplicationArguments &applicationArguments) = default;
+    /**
+     * Constructeur par copie.
+     * Comportement par défaut.
+     */
+    ApplicationArguments(const ApplicationArguments &applicationArguments) = default;
 
-	/**
-	 * Destructeur de l'instance.
-	 * Comportement par défaut.
-	 */
-	virtual ~ApplicationArguments() = default;
+    /**
+     * Destructeur de l'instance.
+     * Comportement par défaut.
+     */
+    virtual ~ApplicationArguments() = default;
 
 protected:
-	std::string logFileName;
-	bool excludeExtensions = false;
-	int filterHour = -1;
-	std::string dotFileName;
+    std::string logFileName;
+    bool excludeExtensions = false;
+    int filterHour = -1;
+    std::string dotFileName;
 };
 
 inline std::ostream &operator<<(std::ostream &os, const ApplicationArguments &applicationArguments) {
     os << "ApplicationArguments{logFileName=" << applicationArguments.logFileName
-        << ", excludeExtensions=" << std::boolalpha << applicationArguments.excludeExtensions
-        << ", filterHour=" << applicationArguments.filterHour
-        << ", dotFileName=" << applicationArguments.dotFileName
-        << "}";
+       << ", excludeExtensions=" << std::boolalpha << applicationArguments.excludeExtensions
+       << ", filterHour=" << applicationArguments.filterHour
+       << ", dotFileName=" << applicationArguments.dotFileName
+       << "}";
     return os;
 }
 

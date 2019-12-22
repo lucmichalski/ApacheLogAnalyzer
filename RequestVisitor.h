@@ -55,7 +55,7 @@ public:
      * @param _userName Le nom d'utilisateur d'origine
      */
     RequestVisitor(std::string _userLogName, std::string _userName)
-            : userLogName(move(_userLogName)), userName(move(_userName)) {}
+        : userLogName(move(_userLogName)), userName(move(_userName)) {}
 
     /**
      * Constructeur par copie du request visitor.

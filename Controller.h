@@ -102,12 +102,12 @@ protected:
 };
 
 inline std::ostream &operator<<(std::ostream &os, const Controller &controller) {
-    os << "Controller{logManager=" << controller.logManager
-       << ", fileManager=" << controller.fileManager
-       << ", applicationArguments=" << controller.applicationArguments
-       << ", log=" << controller.log
-       << "}";
-    return os;
+  os << "Controller{logManager=" << controller.logManager
+     << ", fileManager=" << controller.fileManager
+     << ", applicationArguments=" << controller.applicationArguments
+     << ", log=" << controller.log
+     << "}";
+  return os;
 }
 
 #endif //APACHELOGANALYZER_CONTROLLER_H
